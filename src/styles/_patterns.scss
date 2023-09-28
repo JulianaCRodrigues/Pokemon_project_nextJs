@@ -1,0 +1,527 @@
+@use 'variables';
+
+.tag {
+  display: flex;
+  align-items: center;
+  background-color: variables.$white;
+  border-radius: 24.4rem;
+  max-width: 12.1rem;
+  padding: 0.6rem 0.4rem;
+
+  &.blueTag {
+    .icon {
+      background-color: rgba(63, 104, 186, 0.15);
+    }
+
+    span {
+      color: variables.$blue;
+    }
+  }
+
+  .icon {
+    width: 2.6rem;
+    height: 2.6rem;
+    background-color: rgba(194, 0, 0, 0.12);
+    border-radius: 50%;
+    @include centerTotalFlex;
+    margin-right: 0.8rem;
+  }
+
+  span {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 150%;
+    color: variables.$red;
+  }
+}
+
+.search {
+  background-color: variables.$white;
+  border-radius: 12.2rem;
+  width: 100%;
+  max-width: 40.3rem;
+  height: 5.6rem;
+  @include flex(row, center, space-between);
+  padding-left: 2.4rem;
+  padding-right: 0.7rem;
+
+  input[type=text] {
+    border: 0;
+    outline: none;
+    width: 80%;
+    font-size: 1.5rem;
+    line-height: 150%;
+    color: #A0AFBA;
+
+    &::placeholder {
+      color: #A0AFBA;
+    }
+  }
+
+  button {
+    width: 4.2rem;
+    height: 4.2rem;
+    background-color: rgba(158, 185, 225, 0.1);
+    border-radius: 50%;
+    border: 1px solid transparent;
+    transition: border-color .3s;
+
+    &:hover {
+      border-color: #3E75C3;
+    }
+
+    @include centerTotalFlex;
+  }
+}
+
+.typeFilter {
+  display: flex;
+  align-items: center;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all .3s;
+
+  &:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  .icon {
+    width: 2.8rem;
+    height: 2.8rem;
+    @include centerTotalFlex;
+    margin-right: 0.5rem;
+  }
+
+  span {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 150%;
+  }
+
+  &.ghost {
+    span {
+      color: #616EB7;
+    }
+  }
+
+  &.bug {
+    span {
+      color: #9BBA48;
+    }
+  }
+
+  &.dark {
+    span {
+      color: #595761;
+    }
+  }
+
+  &.dragon {
+    span {
+      color: #2C6AC1;
+    }
+  }
+
+  &.eletric {
+    span {
+      color: #EED967;
+    }
+  }
+
+  &.fairy {
+    span {
+      color: #E296E1;
+    }
+  }
+
+  &.fighting {
+    span {
+      color: #C44D61;
+    }
+  }
+
+  &.ground {
+    span {
+      color: #CE8056;
+    }
+  }
+
+  &.ice {
+    span {
+      color: #8BCEC1;
+    }
+  }
+
+  &.normal {
+    span {
+      color: #A0A29F;
+    }
+  }
+
+  &.poison {
+    span {
+      color: #AC6ACA;
+    }
+  }
+
+  &.psychic {
+    span {
+      color: #EB8B85;
+    }
+  }
+
+  &.rock {
+    span {
+      color: #8BCEC1;
+    }
+  }
+
+  &.grass {
+    span {
+      color: #73B861;
+    }
+  }
+
+  &.steel {
+    span {
+      color: #6594A1;
+    }
+  }
+
+  &.water {
+    span {
+      color: #88A3D4;
+    }
+  }
+
+  &.fire {
+    span {
+      color: #F66D6D;
+    }
+  }
+
+  &.flying {
+    span {
+      color: #A6BBE8;
+    }
+  }
+}
+
+.cardPokemon {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 28rem;
+  height: 30.4rem;
+  background-color: variables.$white;
+  border-radius: 12px;
+  box-shadow: 0px 10px 51px -5px rgba(183, 189, 193, 0.3);
+  transition: all .3s;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 12px 40px -5px rgba(90, 96, 100, 0.3);
+  }
+
+  &.grass {
+    .image {
+      &:after {
+        background-color: rgb(115, 184, 97, 0.2);
+      }
+    }
+  }
+
+  &.bug {
+    .image {
+      &:after {
+        background-color: rgb(155, 186, 72, 0.2);
+      }
+    }
+  }
+
+  &.dark {
+    .image {
+      &:after {
+        background-color: rgba(155, 186, 72, 0.2)
+      }
+    }
+  }
+
+  &.dragon {
+    .image {
+      &:after {
+        background-color: rgb(44, 106, 193, 0.2);
+      }
+    }
+  }
+
+  &.electric {
+    .image {
+      &:after {
+        background-color: rgb(212, 188, 52, 0.2);
+      }
+    }
+  }
+
+  &.fairy {
+    .image {
+      &:after {
+        background-color: rgb(226, 150, 225, 0.2);
+      }
+    }
+  }
+
+  &.fighting {
+    .image {
+      &:after {
+        background-color: rgb(196, 77, 97, 0.2);
+      }
+    }
+  }
+
+  &.ground {
+    .image {
+      &:after {
+        background-color: rgb(206, 128, 86, 0.2);
+      }
+    }
+  }
+
+  &.ice {
+    .image {
+      &:after {
+        background-color: rgb(113, 186, 172, 0.2);
+      }
+    }
+  }
+
+  &.normal {
+    .image {
+      &:after {
+        background-color: rgb(144, 144, 144, 0.2);
+      }
+    }
+  }
+
+  &.poison {
+    .image {
+      &:after {
+        background-color: rgb(172, 106, 202, 0.2);
+      }
+    }
+  }
+
+  &.psychic {
+    .image {
+      &:after {
+        background-color: rgb(235, 139, 133, 0.2);
+      }
+    }
+  }
+
+  &.rock {
+    .image {
+      &:after {
+        background-color: rgb(132, 190, 179, 0.2);
+      }
+    }
+  }
+
+  &.ghost {
+    .image {
+      &:after {
+        background-color: rgb(97, 110, 183, 0.2);
+      }
+    }
+  }
+
+  &.steal {
+    .image {
+      &:after {
+        background-color: rgb(101, 148, 161, 0.2);
+      }
+    }
+  }
+
+  &.water {
+    .image {
+      &:after {
+        background-color: rgb(79, 119, 190, 0.2);
+      }
+    }
+  }
+
+  &.fire {
+    .image {
+      &:after {
+        background-color: rgb(233, 99, 3, 0.2);
+      }
+    }
+  }
+
+  &.flying {
+    .image {
+      &:after {
+        background-color: rgb(117, 140, 189, 0.2);
+      }
+    }
+  }
+
+  .image {
+    position: relative;
+    width: 20rem;
+    height: 20rem;
+    @include centerTotalFlex;
+    margin: 0 auto;
+    margin-bottom: 1.4rem;
+
+    &:after {
+      content: "";
+      width: 16.5rem;
+      height: 16.5rem;
+      position: absolute;
+      z-index: -1;
+      border-radius: 50%
+    }
+  }
+
+  .info {
+    @include flex (row, flex-end, space-between);
+    padding: 0 2.8rem;
+
+    .text {
+      span {
+        text-align: left;
+        display: block;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 150%;
+        color: #7a7d80;
+        margin-bottom: 0.6rem;
+      }
+    }
+
+    .icon {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.tagType {
+  display: inline-block;
+  padding: 0 2.5rem;
+  line-height: 2.4rem;
+  border-radius: 2px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.13px;
+  font-family: 'Montserrat', sans-serif;
+
+  &.bug {
+    color: #9BBA48;
+    background-color: rgb(155, 186, 72, 0.1);
+  }
+
+  &.ghost {
+    color: #616EB7;
+    background-color: rgb(97, 110, 183, 0.1);
+  }
+
+  &.dark {
+    color: #595761;
+    background-color: rgba(155, 186, 72, 0.1)
+  }
+
+  &.dragon {
+    color: #2C6AC1;
+    background-color: rgb(44, 106, 193, 0.1);
+  }
+
+  &.eletric {
+    color: #EED967;
+    background-color: rgb(212, 188, 52, 0.1);
+  }
+
+  &.fairy {
+    color: #E296E1;
+    background-color: rgb(226, 150, 225, 0.1);
+  }
+
+  &.fighting {
+    color: #C44D61;
+    background-color: rgb(196, 77, 97, 0.1);
+  }
+
+  &.ground {
+    color: #CE8056;
+    background-color: rgb(206, 128, 86, 0.1);
+  }
+
+  &.ice {
+    color: #8BCEC1;
+    background-color: rgb(113, 186, 172, 0.1);
+  }
+
+  &.normal {
+    color: #A0A29F;
+    background-color: rgb(144, 144, 144, 0.1);
+  }
+
+  &.poison {
+    color: #AC6ACA;
+    background-color: rgb(172, 106, 202, 0.1);
+  }
+
+  &.psychic {
+    color: #EB8B85;
+    background-color: rgb(235, 139, 133, 0.1);
+  }
+
+  &.rock {
+    color: #8BCEC1;
+    background-color: rgb(132, 190, 179, 0.1);
+  }
+
+  &.grass {
+    color: #73B861;
+    background-color: rgb(115, 184, 97, 0.1);
+  }
+
+  &.steel {
+    color: #6594A1;
+    background-color: rgb(101, 148, 161, 0.1);
+  }
+
+  &.water {
+    color: #88A3D4;
+    background-color: rgb(79, 119, 190, 0.1);
+  }
+
+  &.fire {
+    color: #F66D6D;
+    background-color: rgb(233, 99, 3, 0.1);
+  }
+
+  &.flying {
+    color: #A6BBE8;
+    background-color: rgb(117, 140, 189, 0.1);
+  }
+
+}
+
+.btnLoadMore {
+  border-radius: 6px;
+  background-color: rgba(63, 93, 179, 0.10);
+  padding: 1.4rem 2rem;
+  color: #3F5DB3;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.14px;
+  transition: all .3s;
+  &:hover {
+    background-color: #3F5DB3;
+    color: variables.$white;
+  }
+}

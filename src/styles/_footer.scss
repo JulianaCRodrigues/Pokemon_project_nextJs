@@ -1,0 +1,28 @@
+footer {
+  width: 100%;
+  background-color: #3F5DB3;
+  padding-top: 6.7rem;
+  padding-bottom: 6.5rem;
+
+  .container {
+    @include flex(row, center, space-between);
+  }
+
+  .text {
+    h3 {
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 180%;
+    }
+
+    p {
+      color: rgb(255, 255, 255, 0.8);
+      font-family: 'Inter', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      line-height: 180%;
+    }
+  }
+}
