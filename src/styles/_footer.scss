@@ -1,6 +1,6 @@
 footer {
   width: 100%;
-  background-color: #3F5DB3;
+  background-color: var(--blue-primary);
   padding-top: 6.7rem;
   padding-bottom: 6.5rem;
 
@@ -10,7 +10,7 @@ footer {
 
   .text {
     h3 {
-      color: #FFFFFF;
+      color: var(--white);
       font-family: 'Inter', sans-serif;
       font-size: 1.8rem;
       font-weight: 700;

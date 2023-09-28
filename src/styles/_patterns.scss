@@ -1,9 +1,8 @@
-@use 'variables';
 
 .tag {
   display: flex;
   align-items: center;
-  background-color: variables.$white;
+  background-color: var(--white);
   border-radius: 24.4rem;
   max-width: 12.1rem;
   padding: 0.6rem 0.4rem;
@@ -14,7 +13,7 @@
     }
 
     span {
-      color: variables.$blue;
+      color: var(--blue)
     }
   }
 
@@ -31,12 +30,12 @@
     font-size: 1.5rem;
     font-weight: 600;
     line-height: 150%;
-    color: variables.$red;
+    color: var(--red)
   }
 }
 
 .search {
-  background-color: variables.$white;
+  background-color: var(--white);
   border-radius: 12.2rem;
   width: 100%;
   max-width: 40.3rem;
@@ -67,7 +66,7 @@
     transition: border-color .3s;
 
     &:hover {
-      border-color: #3E75C3;
+      border-color: var(--blue);
     }
 
     @include centerTotalFlex;
@@ -101,109 +100,109 @@
 
   &.ghost {
     span {
-      color: #616EB7;
+      color: var(--type-ghost);
     }
   }
 
   &.bug {
     span {
-      color: #9BBA48;
+      color: var(--type-bug);
     }
   }
 
   &.dark {
     span {
-      color: #595761;
+      color: var(--type-dark);
     }
   }
 
   &.dragon {
     span {
-      color: #2C6AC1;
+      color: var(--type-dragon);
     }
   }
 
   &.eletric {
     span {
-      color: #EED967;
+      color: var(--type-electric);
     }
   }
 
   &.fairy {
     span {
-      color: #E296E1;
+      color: var(--type-fairy);
     }
   }
 
   &.fighting {
     span {
-      color: #C44D61;
+      color: var(--type-fighting);
     }
   }
 
   &.ground {
     span {
-      color: #CE8056;
+      color: var(--type-ground);
     }
   }
 
   &.ice {
     span {
-      color: #8BCEC1;
+      color: var(--type-ice);
     }
   }
 
   &.normal {
     span {
-      color: #A0A29F;
+      color: var(--type-normal);
     }
   }
 
   &.poison {
     span {
-      color: #AC6ACA;
+      color: var(--type-poison);
     }
   }
 
   &.psychic {
     span {
-      color: #EB8B85;
+      color: var(--type-psychic);
     }
   }
 
   &.rock {
     span {
-      color: #8BCEC1;
+      color: var(--type-rock);
     }
   }
 
   &.grass {
     span {
-      color: #73B861;
+      color: var(--type-grass);
     }
   }
 
   &.steel {
     span {
-      color: #6594A1;
+      color: var(--type-steal);
     }
   }
 
   &.water {
     span {
-      color: #88A3D4;
+      color: var(--type-water);
     }
   }
 
   &.fire {
     span {
-      color: #F66D6D;
+      color: var(--type-fire);
     }
   }
 
   &.flying {
     span {
-      color: #A6BBE8;
+      color: var(--type-flying);
     }
   }
 }
@@ -214,7 +213,7 @@
   width: 100%;
   max-width: 28rem;
   height: 30.4rem;
-  background-color: variables.$white;
+  background-color: var(--white);
   border-radius: 12px;
   box-shadow: 0px 10px 51px -5px rgba(183, 189, 193, 0.3);
   transition: all .3s;
@@ -227,7 +226,7 @@
   &.grass {
     .image {
       &:after {
-        background-color: rgb(115, 184, 97, 0.2);
+        background-color: var(--type-grass-opacity);
       }
     }
   }
@@ -235,7 +234,7 @@
   &.bug {
     .image {
       &:after {
-        background-color: rgb(155, 186, 72, 0.2);
+        background-color: var(--type-bug-opacity);
       }
     }
   }
@@ -243,7 +242,7 @@
   &.dark {
     .image {
       &:after {
-        background-color: rgba(155, 186, 72, 0.2)
+        background-color: var(--type-dark-opacity)
       }
     }
   }
@@ -251,7 +250,7 @@
   &.dragon {
     .image {
       &:after {
-        background-color: rgb(44, 106, 193, 0.2);
+        background-color: var(--type-dragon-opacity);
       }
     }
   }
@@ -259,7 +258,7 @@
   &.electric {
     .image {
       &:after {
-        background-color: rgb(212, 188, 52, 0.2);
+        background-color: var(--type-electric-opacity);
       }
     }
   }
@@ -267,7 +266,7 @@
   &.fairy {
     .image {
       &:after {
-        background-color: rgb(226, 150, 225, 0.2);
+        background-color: var(--type-fairy-opacity);
       }
     }
   }
@@ -275,7 +274,7 @@
   &.fighting {
     .image {
       &:after {
-        background-color: rgb(196, 77, 97, 0.2);
+        background-color: var(--type-fighting-opacity);
       }
     }
   }
@@ -283,7 +282,7 @@
   &.ground {
     .image {
       &:after {
-        background-color: rgb(206, 128, 86, 0.2);
+        background-color: var(--type-ground-opacity);
       }
     }
   }
@@ -291,7 +290,7 @@
   &.ice {
     .image {
       &:after {
-        background-color: rgb(113, 186, 172, 0.2);
+        background-color: var(--type-ice-opacity);
       }
     }
   }
@@ -299,7 +298,7 @@
   &.normal {
     .image {
       &:after {
-        background-color: rgb(144, 144, 144, 0.2);
+        background-color: var(--type-normal-opacity);
       }
     }
   }
@@ -307,7 +306,7 @@
   &.poison {
     .image {
       &:after {
-        background-color: rgb(172, 106, 202, 0.2);
+        background-color: var(--type-poison-opacity);
       }
     }
   }
@@ -315,7 +314,7 @@
   &.psychic {
     .image {
       &:after {
-        background-color: rgb(235, 139, 133, 0.2);
+        background-color: var(--type-psychic-opacity);
       }
     }
   }
@@ -323,7 +322,7 @@
   &.rock {
     .image {
       &:after {
-        background-color: rgb(132, 190, 179, 0.2);
+        background-color: var(--type-rock-opacity);
       }
     }
   }
@@ -331,7 +330,7 @@
   &.ghost {
     .image {
       &:after {
-        background-color: rgb(97, 110, 183, 0.2);
+        background-color: var(--type-ghost-opacity);
       }
     }
   }
@@ -339,7 +338,7 @@
   &.steal {
     .image {
       &:after {
-        background-color: rgb(101, 148, 161, 0.2);
+        background-color: var(--type-steal-opacity);
       }
     }
   }
@@ -347,7 +346,7 @@
   &.water {
     .image {
       &:after {
-        background-color: rgb(79, 119, 190, 0.2);
+        background-color: var(--type-water-opacity);
       }
     }
   }
@@ -355,7 +354,7 @@
   &.fire {
     .image {
       &:after {
-        background-color: rgb(233, 99, 3, 0.2);
+        background-color:var(--type-fire-opacity);
       }
     }
   }
@@ -363,7 +362,7 @@
   &.flying {
     .image {
       &:after {
-        background-color: rgb(117, 140, 189, 0.2);
+        background-color: var(--type-flying-opacity);
       }
     }
   }
@@ -419,93 +418,93 @@
   font-family: 'Montserrat', sans-serif;
 
   &.bug {
-    color: #9BBA48;
-    background-color: rgb(155, 186, 72, 0.1);
+    color: var(--type-bug);
+    background-color: var(--type-bug-opacity);
   }
 
   &.ghost {
-    color: #616EB7;
-    background-color: rgb(97, 110, 183, 0.1);
+    color: var(--type-ghost);
+    background-color: var(--type-ghost-opacity);
   }
 
   &.dark {
-    color: #595761;
-    background-color: rgba(155, 186, 72, 0.1)
+    color: var(--type-dark);
+    background-color: var(--type-dark-opacity);
   }
 
   &.dragon {
-    color: #2C6AC1;
-    background-color: rgb(44, 106, 193, 0.1);
+    color: var(--type-dragon);
+    background-color: var(--type-dragon-opacity);
   }
 
   &.eletric {
-    color: #EED967;
-    background-color: rgb(212, 188, 52, 0.1);
+    color: var(--type-electric);
+    background-color: var(--type-electric-opacity);
   }
 
   &.fairy {
-    color: #E296E1;
-    background-color: rgb(226, 150, 225, 0.1);
+    color: var(--type-fairy);
+    background-color: var(--type-fairy-opacity);
   }
 
   &.fighting {
-    color: #C44D61;
-    background-color: rgb(196, 77, 97, 0.1);
+    color: var(--type-fighting);
+    background-color: var(--type-fighting-opacity);
   }
 
   &.ground {
-    color: #CE8056;
-    background-color: rgb(206, 128, 86, 0.1);
+    color: var(--type-ground);
+    background-color: var(--type-ground-opacity);
   }
 
   &.ice {
-    color: #8BCEC1;
-    background-color: rgb(113, 186, 172, 0.1);
+    color: var(--type-ice);
+    background-color: var(--type-ice-opacity);
   }
 
   &.normal {
-    color: #A0A29F;
-    background-color: rgb(144, 144, 144, 0.1);
+    color: var(--type-normal);
+    background-color: var(--type-normal-opacity);
   }
 
   &.poison {
-    color: #AC6ACA;
-    background-color: rgb(172, 106, 202, 0.1);
+    color: var(--type-poison);
+    background-color: var(--type-poison-opacity);
   }
 
   &.psychic {
-    color: #EB8B85;
-    background-color: rgb(235, 139, 133, 0.1);
+    color: var(--type-psychic);
+    background-color: var(--type-psychic-opacity);
   }
 
   &.rock {
-    color: #8BCEC1;
-    background-color: rgb(132, 190, 179, 0.1);
+    color: var(--type-rock);
+    background-color: var(--type-rock-opacity);
   }
 
   &.grass {
-    color: #73B861;
-    background-color: rgb(115, 184, 97, 0.1);
+    color: var(--type-grass);
+    background-color: var(--type-grass-opacity);
   }
 
   &.steel {
-    color: #6594A1;
-    background-color: rgb(101, 148, 161, 0.1);
+    color: var(--type-steal);
+    background-color: var(--type-steal-opacity);
   }
 
   &.water {
-    color: #88A3D4;
-    background-color: rgb(79, 119, 190, 0.1);
+    color: var(--type-water);
+    background-color: var(--type-water-opacity);
   }
 
   &.fire {
-    color: #F66D6D;
-    background-color: rgb(233, 99, 3, 0.1);
+    color: var(--type-fire);
+    background-color: var(--type-fire-opacity);
   }
 
   &.flying {
-    color: #A6BBE8;
-    background-color: rgb(117, 140, 189, 0.1);
+    color: var(--type-flying);
+    background-color: var(--type-flying-opacity);
   }
 
 }
@@ -514,14 +513,14 @@
   border-radius: 6px;
   background-color: rgba(63, 93, 179, 0.10);
   padding: 1.4rem 2rem;
-  color: #3F5DB3;
+  color: var(--blue-primary);
   font-family: 'Montserrat', sans-serif;
   font-size: 1.4rem;
   font-weight: 600;
   letter-spacing: -0.14px;
   transition: all .3s;
   &:hover {
-    background-color: #3F5DB3;
-    color: variables.$white;
+    background-color:var(--blue-primary);
+    color: var(--white);
   }
 }

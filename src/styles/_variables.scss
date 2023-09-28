@@ -1,3 +1,47 @@
-$white: #FFFFFF;
-$red: #C20001;
-$blue:#3F67BA;
+:root {
+  --type-bug: #9BBA48;
+  --type-dark: #595761;
+  --type-dragon: #2C6AC1;
+  --type-electric: #D4BC34;
+  --type-fairy: #E296E1;
+  --type-fighting: #C44D61;
+  --type-ground: #CE8056;
+  --type-ice: #71BAAC;
+  --type-normal: #909090;
+  --type-poison: #AC6ACA;
+  --type-psychic: #EB8B85;
+  --type-rock: #84BEB3;
+  --type-ghost: #616EB7;
+  --type-grass: #73B861;
+  --type-steal: #6594A1;
+  --type-water: #4F77BE;
+  --type-fire: #E96303;
+  --type-flying: #758CBD;
+
+  // ------- OPACITY ------ //
+
+  --type-bug-opacity: rgb(155, 186, 72, 0.2);
+  --type-dark-opacity: rgb(89, 87, 97, 0.2);
+  --type-dragon-opacity: rgb(44, 106, 193, 0.2);
+  --type-electric-opacity: rgb(212, 188, 52, 0.2);
+  --type-fairy-opacity: rgb(226, 150, 225, 0.2);
+  --type-fighting-opacity: rgb(196, 77, 97, 0.2);
+  --type-ground-opacity: rgb(206, 128, 86, 0.2);
+  --type-ice-opacity: rgb(113, 186, 172, 0.2);
+  --type-normal-opacity: rgb(144, 144, 144, 0.2);
+  --type-poison-opacity: rgb(172, 106, 202, 0.2);
+  --type-psychic-opacity: rgb(235, 139, 133, 0.2);
+  --type-rock-opacity: rgb(132, 190, 179, 0.2);
+  --type-ghost-opacity: rgb(97, 110, 183, 0.2);
+  --type-grass-opacity: rgb(115, 184, 97, 0.2);
+  --type-steal-opacity: rgb(101, 148, 161, 0.2);
+  --type-water-opacity: rgb(79, 119, 190, 0.2);
+  --type-fire-opacity: rgb(233, 99, 3, 0.2);
+  --type-flying-opacity: rgb(117, 140, 189, 0.2);
+
+  --white: #FFFFFF;
+  --red: #C20001;
+  --blue: #3F67BA;
+  
+  --blue-primary: #3F5DB3;
+}
