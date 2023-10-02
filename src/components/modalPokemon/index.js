@@ -1,12 +1,14 @@
 
 export function ModalPokemon() {
   return (
-    <div className="modal">
+    <div className="modal" typePokemonMOdal = "grass">
       <div className="overlay"></div>
 
       <div className="box">
-        <img src="assets/close.svg"></img>
-      </div>
+        <button className="close">
+           <img src="assets/close.svg"></img> 
+        </button>
+      
 
       <div className="leftContainer">
         <div className="icon">
@@ -51,10 +53,16 @@ export function ModalPokemon() {
           <h4>Weaknesses</h4>
           <ul>
             <li>
-              <span className="tagType poison">Poison</span>
-              <span className="tagType psychic">Psychic</span>
-              <span className="tagType flying">Flying</span>
-              <span className="tagType ice">Ice</span>
+              <span className="tagType fire">Fire</span>
+            </li>
+            <li>
+               <span className="tagType psychic">Psychic</span>
+            </li>
+            <li>
+                <span className="tagType flying">Flying</span>
+            </li>
+            <li>
+                  <span className="tagType ice">Ice</span>
             </li>
           </ul>
 
@@ -146,6 +154,9 @@ export function ModalPokemon() {
         </div>
 
       </div>
+
+      </div>
+
     </div>
   )
 }
