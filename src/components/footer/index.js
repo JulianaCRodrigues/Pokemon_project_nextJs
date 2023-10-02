@@ -11,6 +11,7 @@ export function Footer() {
         <a href="site codeboost" target balnk>
           <img src="assets/codeboost.svg"></img>
         </a>
+
       </div>
     </footer>
 

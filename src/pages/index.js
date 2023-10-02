@@ -1,3 +1,4 @@
+import { SlideArea } from "@/components/Slide";
 import { CardPokemon } from "@/components/cardPokemon";
 import { Footer } from "@/components/footer";
 import { ModalPokemon } from "@/components/modalPokemon";
@@ -13,7 +14,9 @@ export default function Home() {
 
     <Footer /> */}
 
-    <ModalPokemon />
+    {/* <ModalPokemon /> */}
+
+    <SlideArea />
 
     </>
 
