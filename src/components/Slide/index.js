@@ -1,20 +1,20 @@
 
+
+
 export function SlideArea() {
 
   return (
+
     <section className="s-area-slide-hero">
       <div className="slide-hero">
         <div className="swiper-wrapper">
           <div className="swiper-slide">
-
             <div className="main-area">
               <div className="container">
                 <div className="text">
-
                   <div className="tag">
                     <div className="icon">
                       <img src="assets/bag-red.svg"></img>
-
 
                     </div>
                     <span>pokedex</span>
@@ -31,16 +31,12 @@ export function SlideArea() {
 
                 </div>
 
-                <div className="area-explorer">
+                <div className="area-explore">
                   <div className="txt">
                     <div className="icon">
-                      <img src="assets/arrow-down-white.svg"></img>
+                      <img src="assets/arrow-down-white.svg" alt="" />
                     </div>
-                    <span> explore</span>
-                  </div>
-
-                  <div className="swiper-pagination"> 
-
+                    <span>explore</span>
                   </div>
 
                 </div>
@@ -55,5 +51,7 @@ export function SlideArea() {
       </div>
 
     </section>
+
+
   )
 }
