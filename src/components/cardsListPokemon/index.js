@@ -18,11 +18,19 @@ export function ListCardPokemon() {
           <div className="left-container">
             <ul>
               <li>
-                <button class="typeFilter active all">
-                  <div class="icon">
+                <button className="typeFilter all active">
+                  <div className="icon">
                     <img src="assets/icon-all.svg" alt=""/>
                   </div>
                   <span>All</span>
+                </button>
+              </li>
+              <li>
+                <button className="typeFilter fire">
+                  <div className="icon">
+                    <img src="assets/icon-types/fire.svg" alt=""/>
+                  </div>
+                  <span>Fire</span>
                 </button>
               </li>
             </ul>
@@ -32,13 +40,18 @@ export function ListCardPokemon() {
             <div className="top-container">
                 <div>
                   <img src="assets/icon-pokeball.svg"></img>
+                  <span><strong className="countPokemons">150 </strong> Pokémons</span>
                 </div>
-                <span><strong className="countPokemons">150 </strong> Pokémons</span>
+       
             </div>
             <div className="all">
               <CardPokemon />
+              <CardPokemon />
+              <CardPokemon />
+              <CardPokemon />
+              <CardPokemon />
             </div>
-            <button class="btnLoadMore">Load more Pokémons</button>
+            <button className="btnLoadMore">Load more Pokémons</button>
           </div>
 
         </div>
