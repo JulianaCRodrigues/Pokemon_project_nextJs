@@ -3,4 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-module.exports = nextConfig
+module.exports = {
+  images: {
+    domains: ['pokeapi.co'], // Adicione o hostname aqui
+  },
+  nextConfig
+}
