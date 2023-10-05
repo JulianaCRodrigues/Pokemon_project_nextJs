@@ -846,7 +846,6 @@
       }
 
       .stats {
-
         h5 {
           color: #4D5053;
           font-size: 1.3rem;
@@ -856,8 +855,9 @@
           margin-bottom: 1.6rem;
         }
 
-        .all {
+        .allStats {
           .item {
+            display: flex;
             @include flex(row, center, space-between);
 
             &:not(:last-child) {
@@ -896,7 +896,6 @@
                 left: 0;
                 @include flex (row, center, center);
                 width: 100%;
-                display: flex;
 
                 li {
                   width: 4px;

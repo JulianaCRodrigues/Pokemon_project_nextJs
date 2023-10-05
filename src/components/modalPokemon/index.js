@@ -1,23 +1,29 @@
 import Image from "next/image";
-import { ImageModal } from "./infoModal";
+import { ImageModal } from "./imageModal";
 
 
+export function ModalPokemon({id,onClose =() => {}}) {
 
-
-export function ModalPokemon() {
-
-
+  const handleOutsideClick = (event) => {
+    //TODO:  console.log('Clicked on', event.target.id);
+    if (event.target.id === id) {
+      onClose();
+    }
+  }
   return (
-    <div className="modal" typePokemonMOdal = "grass">
+    <div id={id} className="modal" typePokemonMOdal = "grass" onClick={handleOutsideClick}>
       <div className="overlay"></div>
       <div className="box">
-        <button className="close">
-        <Image 
+        <button className="close" onClick={onClose}>
+          <div>
+               <Image 
              src="assets/close.svg"
              width={36}
              height={36}
              alt="imagem x"
         /> 
+          </div>
+     
         </button>
       
 
@@ -87,7 +93,7 @@ export function ModalPokemon() {
 
         <div className="stats">
           <h5>Stats</h5>
-          <div className="all">
+          <div className="allStats">
             <div className="item">
               <span>HP</span>
               <div className="barStatus">

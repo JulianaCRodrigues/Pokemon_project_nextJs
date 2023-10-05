@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 
 
 export function Header() {
@@ -5,9 +7,12 @@ export function Header() {
   return (
     <header>
       <div className="container">
-        <a>
-          <img src="assets/logo.svg" alt="Logo do Pokemon" title="Logo do Pokemon"></img>
-        </a>
+
+        <Link href="" target="_blank">
+          <Image 
+          src="assets/logo.svg" alt="Logo do Pokemon" title="Logo do Pokemon" width={159} height={58}
+          />
+        </Link>
         <p>Case Study -&gt; Code<strong>Boost</strong></p>
       </div>
     </header>

@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 
 
 export function Footer() {
@@ -8,10 +10,9 @@ export function Footer() {
           <h3 className="h3">Modulo NextJs</h3>
           <p>Consumindo e exibindo dados de uma API</p>
         </div>
-        <a href="site codeboost" target balnk>
-          <img src="assets/codeboost.svg"></img>
-        </a>
-
+        <Link href="" target="_blank">
+          <Image src="assets/codeboost.svg" width={171} height={42} />
+        </Link>
       </div>
     </footer>
 

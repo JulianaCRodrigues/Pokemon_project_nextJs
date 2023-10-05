@@ -6,6 +6,7 @@ header {
   height: 11.2rem;
   display: flex;
   align-items: center;
+  z-index: 3;
  
   .container {
    @include flex(row, center, space-between);
