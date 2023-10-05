@@ -1,24 +1,41 @@
+import Image from "next/image";
+import { ImageModal } from "./infoModal";
+
+
+
 
 export function ModalPokemon() {
+
+
   return (
     <div className="modal" typePokemonMOdal = "grass">
       <div className="overlay"></div>
-
       <div className="box">
         <button className="close">
-           <img src="assets/close.svg"></img> 
+        <Image 
+             src="assets/close.svg"
+             width={36}
+             height={36}
+             alt="imagem x"
+        /> 
         </button>
       
 
       <div className="leftContainer">
-        <div className="icon">
+
+        <ImageModal 
+        // iconType={}
+        // imagePoke={}
+        />
+
+        {/* <div className="icon">
           <img src="assets/icon-types/grass.svg"></img>
         </div>
         <div className="image">
           <img src="assets/bulbasaur.svg">
           </img>
 
-        </div>
+        </div> */}
       </div>
 
       <div className="rightContainer">

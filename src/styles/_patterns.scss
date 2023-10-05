@@ -79,7 +79,10 @@
   opacity: 0.6;
   transition: all .3s;
 
-  &:hover,
+  &:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
   &:active {
     filter: grayscale(0%);
     opacity: 1;
@@ -894,11 +897,13 @@
                 @include flex (row, center, center);
                 width: 100%;
                 display: flex;
+
                 li {
                   width: 4px;
                   height: 3px;
-                  background-color:var(--white);
-                  &:not(:first-child){
+                  background-color: var(--white);
+
+                  &:not(:first-child) {
                     margin-left: 5.4rem;
                   }
                 }
