@@ -1,193 +1,408 @@
 import Image from "next/image";
 
 
-export function ModalPokemon({index,onClose =() => {},id, imagePoke, namePoke, typePoke, typePoke2, abilities, height,weight}) {
+// export function ModalPokemon({index,onClose =() => {},id, imagePoke, namePoke, typePoke, typePoke2, abilities, height,weight}) {
 
-  const handleOutsideClick = (event) => {
-    //TODO:  console.log('Clicked on', event.target.id);
-    if (event.target.id === index) {
-      onClose();
-    }
-  }
+//   const handleOutsideClick = (event) => {
+//     //TODO:  console.log('Clicked on', event.target.id);
+//     if (event.target.id === index) {
+//       onClose();
+//     }
+//   }
+
+//   const primeiraLetraMaiuscula = (string) => {
+//     return string.charAt(0).toUpperCase() + string.slice(1);
+//   };
+
+//   return (
+//     <div id={index} className="modal" typePokemonModal ={typePoke} onClick={handleOutsideClick}>
+//       <div className="overlay"></div>
+//       <div className="box">
+//         <button className="close" onClick={onClose}>
+//           <div>
+//                <Image 
+//              src="/assets/close.svg"
+//              width={36}
+//              height={36}
+//              alt="imagem x"
+//         /> 
+//           </div>
+
+//         </button>
+
+
+//       <div className="leftContainer">
+
+//       <div className="icon">
+//         <Image 
+//         src={`/assets/icon-types/${typePoke}.svg`}
+//         alt=""
+//         width={20}
+//         height={20}
+//         />
+//       </div>
+//       <div className="image">
+//         <Image 
+//         src={imagePoke}
+//         alt=""
+//         width={202}
+//         height={202}
+//         />
+//       </div>
+//       </div>
+
+//       <div className="rightContainer">
+//         <div className="name">
+//           <h2>{namePoke}</h2>
+//           <span>  {(id < 10) ? `#00${id}` : (id < 100) ? `#0${id}` : `#00${id}`}</span>
+//         </div>
+//         <ul className="type">
+//           <li>
+//             <span className={`tagType ${typePoke}`}>
+//           {primeiraLetraMaiuscula(typePoke)}
+//            </span>
+//           </li>
+//           <li>
+//             <span className={`tagType ${typePoke2}`}>
+//             {primeiraLetraMaiuscula(typePoke2)}
+//             </span>
+//           </li>
+//         </ul>
+//         <ul className="info">
+//           <li>
+//             <span>Height</span>
+//             <strong>{`${height/10}m`}</strong>
+//           </li>
+//           <li>
+//             <span>Weight</span>
+//             <strong>{`${weight/10}kg`}</strong>
+//           </li>
+//           <li>
+//             <span>Abilities</span>
+//             <strong>{abilities}</strong>
+//           </li>
+//         </ul>
+
+//         <div className="weak">
+//           <h4>Weaknesses</h4>
+//           <ul>
+//             <li>
+//               <span className="tagType fire">Fire</span>
+//             </li>
+//             <li>
+//                <span className="tagType psychic">Psychic</span>
+//             </li>
+//             <li>
+//                 <span className="tagType flying">Flying</span>
+//             </li>
+//             <li>
+//                   <span className="tagType ice">Ice</span>
+//             </li>
+//           </ul>
+
+//         </div>
+
+//         <div className="stats">
+//           <h5>Stats</h5>
+//           <div className="allStats">
+//             <div className="item">
+//               <span>HP</span>
+//               <div className="barStatus">
+//                 <div className="bar"></div>
+//                 <ul className="separator">
+//                     <li></li>
+//                     <li></li>
+//                     <li></li>
+//                     <li></li>
+//                 </ul>
+//               </div>
+//             </div>
+
+//             <div className="item">
+//               <span>Attack</span>
+//               <div className="barStatus">
+//                 <div className="bar"></div>
+//                 <ul className="separator">
+//                     <li></li>
+//                     <li></li>
+//                     <li></li>
+//                     <li></li>
+//                 </ul>
+//               </div>
+//             </div>
+
+//             <div className="item">
+//               <span>Defense</span>
+//               <div className="barStatus">
+//                 <div className="bar"></div>
+//                 <ul className="separator">
+//                     <li></li>
+//                     <li></li>
+//                     <li></li>
+//                     <li></li>
+//                 </ul>
+//               </div>
+//             </div>
+
+//             <div className="item">
+//               <span>Sp. attack</span>
+//               <div className="barStatus">
+//                 <div className="bar"></div>
+//                 <ul className="separator">
+//                     <li></li>
+//                     <li></li>
+//                     <li></li>
+//                     <li></li>
+//                 </ul>
+//               </div>
+//             </div>
+
+//             <div className="item">
+//               <span>Sp. defense</span>
+//               <div className="barStatus">
+//                 <div className="bar"></div>
+//                 <ul className="separator">
+//                     <li></li>
+//                     <li></li>
+//                     <li></li>
+//                     <li></li>
+//                 </ul>
+//               </div>
+//             </div>
+
+//             <div className="item">
+//               <span>Speed</span>
+//               <div className="barStatus">
+//                 <div className="bar"></div>
+//                 <ul className="separator">
+//                     <li></li>
+//                     <li></li>
+//                     <li></li>
+//                     <li></li>
+//                 </ul>
+//               </div>
+//             </div>
+//           </div>
+
+
+//         </div>
+
+//       </div>
+
+//       </div>
+
+//     </div>
+//   )
+// }
+
+
+export function ModalPokemon({
+
+  onClose,
+  pokemonData,
+  pokemonInfoTypes,
+
+}) {
+
+  const { name, id, types, abilities, weight, height, sprites } = pokemonData;
+
+  const { damage } = pokemonInfoTypes;
+
+
+  const typeName = types[0].type.name;
+
 
   const primeiraLetraMaiuscula = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
   return (
-    <div id={index} className="modal" typePokemonModal ={typePoke} onClick={handleOutsideClick}>
+    <div className="modal" typePokemonModal={typeName} >
       <div className="overlay"></div>
       <div className="box">
         <button className="close" onClick={onClose}>
           <div>
-               <Image 
-             src="/assets/close.svg"
-             width={36}
-             height={36}
-             alt="imagem x"
-        /> 
+            <Image
+              src="/assets/close.svg"
+              width={36}
+              height={36}
+              alt="imagem x"
+            />
           </div>
-     
+
         </button>
-      
 
-      <div className="leftContainer">
 
-      <div className="icon">
-        <Image 
-        src={`/assets/icon-types/${typePoke}.svg`}
-        alt=""
-        width={20}
-        height={20}
-        />
-      </div>
-      <div className="image">
-        <Image 
-        src={imagePoke}
-        alt=""
-        width={202}
-        height={202}
-        />
-      </div>
-      </div>
+        <div className="leftContainer">
 
-      <div className="rightContainer">
-        <div className="name">
-          <h2>{namePoke}</h2>
-          <span>  {(id < 10) ? `#00${id}` : (id < 100) ? `#0${id}` : `#00${id}`}</span>
+          <div className="icon">
+            <Image
+              src={`/assets/icon-types/${typeName}.svg`}
+              alt=""
+              width={20}
+              height={20}
+            />
+          </div>
+          <div className="image">
+            <Image
+              src={sprites.other.dream_world.front_default}
+              alt=""
+              width={202}
+              height={202}
+            />
+          </div>
         </div>
-        <ul className="type">
-          <li>
-            <span className={`tagType ${typePoke}`}>
-          {primeiraLetraMaiuscula(typePoke)}
-           </span>
-          </li>
-          <li>
-            <span className={`tagType ${typePoke2}`}>
-            {primeiraLetraMaiuscula(typePoke2)}
-            </span>
-          </li>
-        </ul>
-        <ul className="info">
-          <li>
-            <span>Height</span>
-            <strong>{`${height/10}m`}</strong>
-          </li>
-          <li>
-            <span>Weight</span>
-            <strong>{`${weight/10}kg`}</strong>
-          </li>
-          <li>
-            <span>Abilities</span>
-            <strong>{abilities}</strong>
-          </li>
-        </ul>
 
-        <div className="weak">
-          <h4>Weaknesses</h4>
-          <ul>
+        <div className="rightContainer">
+          <div className="name">
+            <h2>{primeiraLetraMaiuscula(name)}</h2>
+            <span>  {(id < 10) ? `#00${id}` : (id < 100) ? `#0${id}` : `#00${id}`}</span>
+          </div>
+
+
+          <ul className="type">
+            {
+              types &&
+              types.map((type, index) => (
+                <li key={index}>
+                  <span className={`tagType ${type.type.name}` }>
+                    {primeiraLetraMaiuscula(type.type.name)}
+                  </span>
+                </li>   
+              ))
+            }
+            </ul>
+
+
+          <ul className="info">
             <li>
-              <span className="tagType fire">Fire</span>
+              <span>Height</span>
+              <strong>{`${height / 10}m`}</strong>
             </li>
             <li>
-               <span className="tagType psychic">Psychic</span>
+              <span>Weight</span>
+              <strong>{`${weight / 10}kg`}</strong>
             </li>
-            <li>
-                <span className="tagType flying">Flying</span>
+
+            {
+              abilities &&
+              abilities.map((ability, index) => (
+                <li key={index}>
+                 <span >Abilities</span>
+              <strong>{primeiraLetraMaiuscula(ability.ability.name)}</strong>
             </li>
-            <li>
-                  <span className="tagType ice">Ice</span>
-            </li>
+              ))
+            }
+          
+             
           </ul>
 
-        </div>
+          <div className="weak">
+            <h4>Weaknesses</h4>
+            <ul>
+              
+              <li>
+                <span className="tagType fire">Fire</span>
+              </li>
+              <li>
+                <span className="tagType psychic">Psychic</span>
+              </li>
+              <li>
+                <span className="tagType flying">Flying</span>
+              </li>
+              <li>
+                <span className="tagType ice">Ice</span>
+              </li>
+            </ul>
 
-        <div className="stats">
-          <h5>Stats</h5>
-          <div className="allStats">
-            <div className="item">
-              <span>HP</span>
-              <div className="barStatus">
-                <div className="bar"></div>
-                <ul className="separator">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="item">
-              <span>Attack</span>
-              <div className="barStatus">
-                <div className="bar"></div>
-                <ul className="separator">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="item">
-              <span>Defense</span>
-              <div className="barStatus">
-                <div className="bar"></div>
-                <ul className="separator">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="item">
-              <span>Sp. attack</span>
-              <div className="barStatus">
-                <div className="bar"></div>
-                <ul className="separator">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="item">
-              <span>Sp. defense</span>
-              <div className="barStatus">
-                <div className="bar"></div>
-                <ul className="separator">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="item">
-              <span>Speed</span>
-              <div className="barStatus">
-                <div className="bar"></div>
-                <ul className="separator">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-              </div>
-            </div>
           </div>
-          
+
+          <div className="stats">
+            <h5>Stats</h5>
+            <div className="allStats">
+              <div className="item">
+                <span>HP</span>
+                <div className="barStatus">
+                  <div className="bar"></div>
+                  <ul className="separator">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="item">
+                <span>Attack</span>
+                <div className="barStatus">
+                  <div className="bar"></div>
+                  <ul className="separator">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="item">
+                <span>Defense</span>
+                <div className="barStatus">
+                  <div className="bar"></div>
+                  <ul className="separator">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="item">
+                <span>Sp. attack</span>
+                <div className="barStatus">
+                  <div className="bar"></div>
+                  <ul className="separator">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="item">
+                <span>Sp. defense</span>
+                <div className="barStatus">
+                  <div className="bar"></div>
+                  <ul className="separator">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="item">
+                <span>Speed</span>
+                <div className="barStatus">
+                  <div className="bar"></div>
+                  <ul className="separator">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
 
         </div>
-
-      </div>
 
       </div>
 
