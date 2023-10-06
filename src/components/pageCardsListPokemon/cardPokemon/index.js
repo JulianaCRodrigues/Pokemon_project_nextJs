@@ -1,22 +1,13 @@
-import { ModalPokemon } from "@/components/modalPokemon";
 import Image from "next/image";
-import { useState } from "react";
 
 
-export function CardPokemon({ image, id, name, icon, type }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+export function CardPokemon({ image, id, name, icon, type, fnOnClick}) {
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
 
   return (
     <>
-      <button className={`cardPokemon  ${type}`} onClick={openModal}>
+      <button className={`cardPokemon ${type}`} onClick={fnOnClick}>
         <div className="image">
           <Image src={image} width={142} height={200} alt="Imagem Pokemon" />
         </div>
@@ -33,7 +24,6 @@ export function CardPokemon({ image, id, name, icon, type }) {
         </div>
       </button>
 
-      {isModalOpen && <ModalPokemon onClose={closeModal} />}
     </>
   );
 }

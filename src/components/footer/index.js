@@ -11,7 +11,7 @@ export function Footer() {
           <p>Consumindo e exibindo dados de uma API</p>
         </div>
         <Link href="" target="_blank">
-          <Image src="assets/codeboost.svg" width={171} height={42} />
+          <Image src="assets/codeboost.svg" width={171} height={42} alt=""/>
         </Link>
       </div>
     </footer>

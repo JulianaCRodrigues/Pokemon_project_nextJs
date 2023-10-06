@@ -1,23 +1,27 @@
 import Image from "next/image";
-import { ImageModal } from "./imageModal";
 
 
-export function ModalPokemon({id,onClose =() => {}}) {
+export function ModalPokemon({index,onClose =() => {},id, imagePoke, namePoke, typePoke, typePoke2, abilities, height,weight}) {
 
   const handleOutsideClick = (event) => {
     //TODO:  console.log('Clicked on', event.target.id);
-    if (event.target.id === id) {
+    if (event.target.id === index) {
       onClose();
     }
   }
+
+  const primeiraLetraMaiuscula = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   return (
-    <div id={id} className="modal" typePokemonMOdal = "grass" onClick={handleOutsideClick}>
+    <div id={index} className="modal" typePokemonModal ={typePoke} onClick={handleOutsideClick}>
       <div className="overlay"></div>
       <div className="box">
         <button className="close" onClick={onClose}>
           <div>
                <Image 
-             src="assets/close.svg"
+             src="/assets/close.svg"
              width={36}
              height={36}
              alt="imagem x"
@@ -29,46 +33,53 @@ export function ModalPokemon({id,onClose =() => {}}) {
 
       <div className="leftContainer">
 
-        <ImageModal 
-        // iconType={}
-        // imagePoke={}
+      <div className="icon">
+        <Image 
+        src={`/assets/icon-types/${typePoke}.svg`}
+        alt=""
+        width={20}
+        height={20}
         />
-
-        {/* <div className="icon">
-          <img src="assets/icon-types/grass.svg"></img>
-        </div>
-        <div className="image">
-          <img src="assets/bulbasaur.svg">
-          </img>
-
-        </div> */}
+      </div>
+      <div className="image">
+        <Image 
+        src={imagePoke}
+        alt=""
+        width={202}
+        height={202}
+        />
+      </div>
       </div>
 
       <div className="rightContainer">
         <div className="name">
-          <h2>Bulbasaur</h2>
-          <span>#001</span>
+          <h2>{namePoke}</h2>
+          <span>  {(id < 10) ? `#00${id}` : (id < 100) ? `#0${id}` : `#00${id}`}</span>
         </div>
         <ul className="type">
           <li>
-            <span className="tagType grass">Grass</span>
+            <span className={`tagType ${typePoke}`}>
+          {primeiraLetraMaiuscula(typePoke)}
+           </span>
           </li>
           <li>
-            <span className="tagType poison">Poison</span>
+            <span className={`tagType ${typePoke2}`}>
+            {primeiraLetraMaiuscula(typePoke2)}
+            </span>
           </li>
         </ul>
         <ul className="info">
           <li>
             <span>Height</span>
-            <strong>0.7m</strong>
+            <strong>{`${height/10}m`}</strong>
           </li>
           <li>
             <span>Weight</span>
-            <strong>6.9kg</strong>
+            <strong>{`${weight/10}kg`}</strong>
           </li>
           <li>
             <span>Abilities</span>
-            <strong>Overgrow</strong>
+            <strong>{abilities}</strong>
           </li>
         </ul>
 
