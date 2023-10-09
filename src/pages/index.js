@@ -1,6 +1,6 @@
 import { SlideArea } from "@/components/Slide";
-import { ModalPokemon } from "@/components/modalPokemon";
-import { ListCardPokemon } from "@/components/pageCardsListPokemon";
+
+import { ListCardPokemon } from "@/components/PageCardsListPokemon";
 
 
 

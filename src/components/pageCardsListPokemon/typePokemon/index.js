@@ -1,10 +1,10 @@
 import Image from "next/image";
 
-export function TypePokemon({ typePoke, nameType, imageSrc }) {
+export function TypePokemon({ typePoke, nameType, imageSrc, fnOnClick, idType }) {
   return (
 
       <li>
-        <button className={`typeFilter ${typePoke}`}>
+        <button className={`typeFilter ${typePoke} `} datatype={idType} onClick={fnOnClick}>
           <div className="icon">
             <Image
               src={imageSrc}

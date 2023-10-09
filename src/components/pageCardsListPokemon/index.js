@@ -4,19 +4,22 @@ import { TypePokemon } from "./typePokemon";
 
 import axios from "axios";
 import Image from "next/image";
-import { ModalPokemon } from "../modalPokemon";
+import { ModalPokemon } from "../ModalPokemon";
 
 
 export function ListCardPokemon() {
 
   const [pokemonInfo, setPokemonInfo] = useState([]);
+  const [pokemonInfoTypes, setPokemonInfoTypes] = useState("");
   const [pokemonById, setPokemonById] = useState("");
   const [typesPokemons, setTypesPokemons] = useState("");
   const [countPokemon, setCountPokemon] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [pageList, setPageList] = useState(9)
+  const [countPages, setCountPages] = useState('');
 
   const openModal = (pokemon) => {
-
+    setPokemonInfoTypes(pokemon)
     setPokemonById(pokemon)
     setIsModalOpen(true);
 
@@ -27,32 +30,33 @@ export function ListCardPokemon() {
   };
 
 
-
   const primeiraLetraMaiuscula = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
 
 
+
+
   useEffect(() => {
     async function listingPokemons() {
       const response = await axios.get(
-        "https://pokeapi.co/api/v2/pokemon?limit=9&offset=0"
+        `https://pokeapi.co/api/v2/pokemon?limit=${pageList}&offset=0`
       );
       const results = response.data.results;
-      console.log(results);
       const detailedPokemonInfo = await Promise.all(
         results.map(async (pokemon) => {
           const detailedResponse = await axios.get(pokemon.url);
-          console.log(detailedResponse.data);
           return detailedResponse.data;
         })
       );
+      console.log(response.data.next)
       setPokemonInfo(detailedPokemonInfo);
       setCountPokemon(response.data.count);
+      setCountPages(response.data.next)
     }
     listingPokemons();
-  }, []);
+  }, [pageList]);
 
   useEffect(() => {
     async function listingTypesPokes() {
@@ -60,12 +64,23 @@ export function ListCardPokemon() {
         "https://pokeapi.co/api/v2/type"
       );
       const results = response.data.results;
-      // console.log(results)
+      const typeDetailsPoke = await Promise.all(
+        results.map(async (pokemon) => {
+          const typeDetailsResponse = await axios.get(pokemon.url);
+          return typeDetailsResponse.data
+        })
+      )
+   
       setTypesPokemons(results);
+      setPokemonInfoTypes(typeDetailsPoke)
     }
     listingTypesPokes();
   }, [])
 
+  const filterByTypes = () => {
+    
+  
+  }
 
   return (
     <section className="s-all-info-pokemons">
@@ -87,10 +102,24 @@ export function ListCardPokemon() {
         <div className="area-all">
           <div className="left-container">
             <ul>
+              <li>
+                <button className="typeFilter all active">
+                  <div className="icon">
+                    <Image
+                      src="assets/icon-all.svg"
+                      alt=""
+                      width={26}
+                      height={26}
+                    />
+                  </div>
+                  <span>All</span>
+                </button>
+              </li>
               {
                 typesPokemons &&
                 typesPokemons.map((poketypes, index) => {
                   const getImageByType = () => {
+                    console.log(index);
                     const type = poketypes.name;
                     return `./assets/icon-types/${type}.svg`;
                   };
@@ -99,8 +128,10 @@ export function ListCardPokemon() {
                       <TypePokemon
                         key={index}
                         typePoke={poketypes.name}
+                       idType ={index}
                         imageSrc={getImageByType()}
                         nameType={primeiraLetraMaiuscula(poketypes.name)}
+                        fnOnClick={filterByTypes}
                       />)
                   }
                 })
@@ -142,21 +173,11 @@ export function ListCardPokemon() {
                   );
                 })}
 
-              {
-                isModalOpen && 
-                <ModalPokemon
-                  imagePoke={pokemonById.sprites.other.dream_world.front_default}
-                  namePoke={primeiraLetraMaiuscula(pokemonById.name)}
-                  id={pokemonById.id}
-                  typePoke={pokemonById.types[0].type.name}
-                  typePoke2={pokemonById.types[1].type.name}
-                  abilities={primeiraLetraMaiuscula(pokemonById.abilities[0].ability.name)}
-                  weight={pokemonById.weight}
-                  height={pokemonById.height}
-                  onClose={closeModal} />
-              }
+              {isModalOpen && <ModalPokemon onClose={closeModal} pokemonData={pokemonById} pokemonInfoTypes={pokemonInfoTypes} />}
             </div>
-            <button className="btnLoadMore">Load more Pokémons</button>
+            {
+              (!(pageList === countPages)) &&
+              <button className="btnLoadMore" onClick={() => setPageList(pageList + 9)}>Load more Pokémons</button>}
           </div>
         </div>
       </div>

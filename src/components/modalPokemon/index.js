@@ -200,13 +200,13 @@ export function ModalPokemon({
 
   onClose,
   pokemonData,
-  pokemonInfoTypes,
+  // pokemonInfoTypes,
 
 }) {
 
   const { name, id, types, abilities, weight, height, sprites } = pokemonData;
 
-  const { damage } = pokemonInfoTypes;
+  // const { damage } = pokemonInfoTypes;
 
 
   const typeName = types[0].type.name;

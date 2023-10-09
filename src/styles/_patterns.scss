@@ -131,7 +131,7 @@
     }
   }
 
-  &.eletric {
+  &.electric {
     span {
       color: var(--type-electric);
     }
@@ -446,7 +446,7 @@
     background-color: var(--type-dragon-opacity);
   }
 
-  &.eletric {
+  &.electric {
     color: var(--type-electric);
     background-color: var(--type-electric-opacity);
   }
@@ -676,6 +676,14 @@
     .box {
       .leftContainer {
         background-image: url("/assets/bg-types/water.svg");
+      }
+    }
+  }
+
+  &[typePokemonModal="dragon"] {
+    .box {
+      .leftContainer {
+        background-image: url("/assets/bg-types/dragon.svg");
       }
     }
   }
