@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { CardPokemon } from "./cardPokemon";
 import { TypePokemon } from "./typePokemon";
 
@@ -9,14 +9,17 @@ import { ModalPokemon } from "../ModalPokemon";
 
 export function ListCardPokemon() {
 
+
   const [pokemonInfo, setPokemonInfo] = useState([]);
   const [pokemonInfoTypes, setPokemonInfoTypes] = useState("");
   const [pokemonById, setPokemonById] = useState("");
+  const [filterPokemon, setFilterPokemon] = useState("")
   const [typesPokemons, setTypesPokemons] = useState("");
   const [countPokemon, setCountPokemon] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pageList, setPageList] = useState(9)
   const [countPages, setCountPages] = useState('');
+
 
   const openModal = (pokemon) => {
     setPokemonInfoTypes(pokemon)
@@ -29,12 +32,13 @@ export function ListCardPokemon() {
     setIsModalOpen(false);
   };
 
+  const filterTypePokemon = () => {
+    
+  }
 
   const primeiraLetraMaiuscula = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-
-
 
 
 
@@ -50,7 +54,7 @@ export function ListCardPokemon() {
           return detailedResponse.data;
         })
       );
-      console.log(response.data.next)
+
       setPokemonInfo(detailedPokemonInfo);
       setCountPokemon(response.data.count);
       setCountPages(response.data.next)
@@ -70,17 +74,34 @@ export function ListCardPokemon() {
           return typeDetailsResponse.data
         })
       )
-   
       setTypesPokemons(results);
-      setPokemonInfoTypes(typeDetailsPoke)
+      setPokemonInfoTypes(typeDetailsPoke);
     }
-    listingTypesPokes();
+
   }, [])
 
-  const filterByTypes = () => {
-    
-  
-  }
+  useEffect(() => {
+    async function filterPokemonByType() {
+
+      const response = await axios.get(
+        `https://pokeapi.co/api/v2/type/`
+      )
+      const results = response.data.results
+      console.log(results);
+
+      const typeDetailsPoke = await Promise.all(
+        results.map(async (pokemon) => {
+          const typeDetailsResponse = await axios.get(pokemon.url);
+          console.log(typeDetailsResponse.data.pokemon);
+          return typeDetailsResponse.data
+        })
+      )
+      setFilterPokemon(typeDetailsPoke)
+    }
+    filterPokemonByType()
+  }, [])
+
+
 
   return (
     <section className="s-all-info-pokemons">
@@ -119,7 +140,6 @@ export function ListCardPokemon() {
                 typesPokemons &&
                 typesPokemons.map((poketypes, index) => {
                   const getImageByType = () => {
-                    console.log(index);
                     const type = poketypes.name;
                     return `./assets/icon-types/${type}.svg`;
                   };
@@ -128,10 +148,10 @@ export function ListCardPokemon() {
                       <TypePokemon
                         key={index}
                         typePoke={poketypes.name}
-                       idType ={index}
+                        idType={index}
                         imageSrc={getImageByType()}
                         nameType={primeiraLetraMaiuscula(poketypes.name)}
-                        fnOnClick={filterByTypes}
+                      // fnOnClick={filterByTypes}
                       />)
                   }
                 })
