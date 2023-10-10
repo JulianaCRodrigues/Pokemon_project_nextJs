@@ -72,18 +72,14 @@
   }
 }
 
-.typeFilter {
+.type-filter {
   display: flex;
   align-items: center;
   filter: grayscale(100%);
   opacity: 0.6;
   transition: all .3s;
-
-  &:hover {
-    filter: grayscale(0%);
-    opacity: 1;
-  }
-  &:active {
+  &:hover,
+  &.active {
     filter: grayscale(0%);
     opacity: 1;
   }
