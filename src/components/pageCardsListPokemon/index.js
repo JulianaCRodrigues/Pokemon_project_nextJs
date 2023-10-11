@@ -71,6 +71,8 @@ export function ListCardPokemon() {
     listingPokemons();
   }, [pageList]);
 
+
+
   useEffect(() => {
     async function listingTypesPokes() {
       const response = await axios.get(
@@ -81,7 +83,6 @@ export function ListCardPokemon() {
       const typeDetailsPoke = await Promise.all(
         results.map(async (pokemon) => {
           const typeDetailsResponse = await axios.get(pokemon.url);
-          console.log(typeDetailsResponse.data)
           return typeDetailsResponse.data
         }
         )  
@@ -91,7 +92,7 @@ export function ListCardPokemon() {
     }
     listingTypesPokes();
 
-  }, [])
+  }, [isModalOpen])
 
 
 
@@ -171,6 +172,7 @@ export function ListCardPokemon() {
               {pokemonInfo &&
                 pokemonInfo.map((pokemon, index) => {
                   const getIconByType = () => {
+                    // console.log(pokemonInfo);
                     const type = pokemon.types[0].type.name;
                     return `assets/icon-types/${type}.svg`;
                   };
@@ -187,7 +189,14 @@ export function ListCardPokemon() {
                   );
                 })}
 
-              {isModalOpen && <ModalPokemon onClose={closeModal} pokemonData={pokemonById} pokemonInfoTypes={pokemonInfoTypes} />}
+              {
+                
+              
+              isModalOpen && <ModalPokemon onClose={closeModal} pokemonData={pokemonById} pokemonListTypes={pokemonInfoTypes} />
+              
+            
+              }
+         
             </div>
             {
             isActive === "all" && !(pageList === countPages) && (

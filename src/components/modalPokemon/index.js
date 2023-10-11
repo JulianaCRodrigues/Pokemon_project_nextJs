@@ -1,21 +1,65 @@
 import Image from "next/image";
+import axios from "axios"
+import { useEffect, useState } from "react";
 
 
 export function ModalPokemon({
 
   onClose,
   pokemonData,
-  // pokemonInfoTypes,
+
 
 }) {
+  const [weaksTypes, setWeaksTypes] = useState("");
 
   const { name, id, types, abilities, weight, height, sprites } = pokemonData;
 
-  // const { damage } = pokemonInfoTypes;
+
 
 
   const typeName = types[0].type.name;
 
+
+
+
+
+
+  // useEffect(() => {
+  //   async function TypesPokes() {
+  //     const response = await axios.get("https://pokeapi.co/api/v2/type");
+  //     const result = response.data.results;
+  //     const typeListsPoke = await Promise.all(
+  //       result.map(async (type) => {
+  //         const typeListResponse = await axios.get(type.url);
+  //         return typeListResponse.data.damage_relations.double_damage_from
+
+  //       })
+  //     );
+  //     console.log(typeListsPoke);
+  //     setWeaksTypes(typeListsPoke);
+  //   }
+  
+  //   TypesPokes();
+  // }, []);
+
+  useEffect(() => {
+    async function TypesPokes() {
+      const response = await axios.get("https://pokeapi.co/api/v2/type");
+      const result = response.data.results;
+      const typeListsPoke = await Promise.all(
+        result.map(async (type) => {
+          const typeListResponse = await axios.get(type.url);
+          return typeListResponse.data; 
+        })
+      );
+
+      setWeaksTypes(typeListsPoke);
+    }
+  
+    TypesPokes();
+  }, []);
+  
+  
 
   const primeiraLetraMaiuscula = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -70,13 +114,13 @@ export function ModalPokemon({
               types &&
               types.map((type, index) => (
                 <li key={index}>
-                  <span className={`tagType ${type.type.name}` }>
+                  <span className={`tagType ${type.type.name}`}>
                     {primeiraLetraMaiuscula(type.type.name)}
                   </span>
-                </li>   
+                </li>
               ))
             }
-            </ul>
+          </ul>
 
 
           <ul className="info">
@@ -93,20 +137,41 @@ export function ModalPokemon({
               abilities &&
               abilities.map((ability, index) => (
                 <li key={index}>
-                 <span >Abilities</span>
-              <strong>{primeiraLetraMaiuscula(ability.ability.name)}</strong>
-            </li>
+                  <span >Abilities</span>
+                  <strong>{primeiraLetraMaiuscula(ability.ability.name)}</strong>
+                </li>
               ))
             }
-          
-             
+
+
           </ul>
 
           <div className="weak">
             <h4>Weaknesses</h4>
-            <ul>
-              
-              <li>
+            
+              {/* {weaksTypes &&
+                weaksTypes.map((weak, index) => (
+                  <li key={index}>
+                    <span className={`tagType ${weak.name}`}>{weak.name}</span>
+                  </li>
+                ))
+              } */}
+
+{weaksTypes &&
+      weaksTypes
+        .filter((type) => type.name === typeName)
+        .map((typeData, index) => (        
+            <ul  key={index}>
+              {typeData.damage_relations.double_damage_from.map((weak, index) => (
+                <li key={index}>
+                  <span className={`tagType ${weak.name}`}>{primeiraLetraMaiuscula( weak.name)}</span>
+                </li>
+              ))}
+            </ul>
+        ))
+    }
+
+              {/* <li>
                 <span className="tagType fire">Fire</span>
               </li>
               <li>
@@ -117,8 +182,8 @@ export function ModalPokemon({
               </li>
               <li>
                 <span className="tagType ice">Ice</span>
-              </li>
-            </ul>
+              </li> */}
+            
 
           </div>
 
