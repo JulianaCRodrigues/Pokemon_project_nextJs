@@ -60,7 +60,7 @@ export function ListCardPokemon() {
       const results = response.data.results;
       const detailedPokemonInfo = await Promise.all(
         results.map(async (pokemon) => {
-          const detailedResponse = await axios.get(pokemon.url);
+          const detailedResponse = await axios.get(pokemon.url)
           return detailedResponse.data;
         })
       );
@@ -171,8 +171,8 @@ export function ListCardPokemon() {
             <div className="all">
               {pokemonInfo &&
                 pokemonInfo.map((pokemon, index) => {
+             
                   const getIconByType = () => {
-                    // console.log(pokemonInfo);
                     const type = pokemon.types[0].type.name;
                     return `assets/icon-types/${type}.svg`;
                   };
@@ -192,7 +192,7 @@ export function ListCardPokemon() {
               {
                 
               
-              isModalOpen && <ModalPokemon onClose={closeModal} pokemonData={pokemonById} pokemonListTypes={pokemonInfoTypes} />
+              isModalOpen && <ModalPokemon onClose={closeModal} pokemonData={pokemonById} />
               
             
               }

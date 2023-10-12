@@ -8,39 +8,19 @@ export function ModalPokemon({
   onClose,
   pokemonData,
 
-
 }) {
   const [weaksTypes, setWeaksTypes] = useState("");
 
-  const { name, id, types, abilities, weight, height, sprites } = pokemonData;
-
-
-
+  const { name, id, types, abilities, weight, height, sprites, stats } = pokemonData;
 
   const typeName = types[0].type.name;
 
+  const statsTypes = stats
+
+  console.log(statsTypes);
 
 
-
-
-
-  // useEffect(() => {
-  //   async function TypesPokes() {
-  //     const response = await axios.get("https://pokeapi.co/api/v2/type");
-  //     const result = response.data.results;
-  //     const typeListsPoke = await Promise.all(
-  //       result.map(async (type) => {
-  //         const typeListResponse = await axios.get(type.url);
-  //         return typeListResponse.data.damage_relations.double_damage_from
-
-  //       })
-  //     );
-  //     console.log(typeListsPoke);
-  //     setWeaksTypes(typeListsPoke);
-  //   }
-  
-  //   TypesPokes();
-  // }, []);
+  console.log(typeName);
 
   useEffect(() => {
     async function TypesPokes() {
@@ -49,17 +29,16 @@ export function ModalPokemon({
       const typeListsPoke = await Promise.all(
         result.map(async (type) => {
           const typeListResponse = await axios.get(type.url);
-          return typeListResponse.data; 
+          return typeListResponse.data;
         })
       );
-
       setWeaksTypes(typeListsPoke);
     }
-  
+
     TypesPokes();
   }, []);
-  
-  
+
+
 
   const primeiraLetraMaiuscula = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -145,65 +124,52 @@ export function ModalPokemon({
 
 
           </ul>
-
           <div className="weak">
             <h4>Weaknesses</h4>
-            
-              {/* {weaksTypes &&
-                weaksTypes.map((weak, index) => (
-                  <li key={index}>
-                    <span className={`tagType ${weak.name}`}>{weak.name}</span>
-                  </li>
-                ))
-              } */}
-
-{weaksTypes &&
-      weaksTypes
-        .filter((type) => type.name === typeName)
-        .map((typeData, index) => (        
-            <ul  key={index}>
-              {typeData.damage_relations.double_damage_from.map((weak, index) => (
-                <li key={index}>
-                  <span className={`tagType ${weak.name}`}>{primeiraLetraMaiuscula( weak.name)}</span>
-                </li>
-              ))}
-            </ul>
-        ))
-    }
-
-              {/* <li>
-                <span className="tagType fire">Fire</span>
-              </li>
-              <li>
-                <span className="tagType psychic">Psychic</span>
-              </li>
-              <li>
-                <span className="tagType flying">Flying</span>
-              </li>
-              <li>
-                <span className="tagType ice">Ice</span>
-              </li> */}
-            
-
+            {weaksTypes &&
+              weaksTypes
+                .filter((type) => type.name === typeName)
+                .map((typeData, index) => (
+                  <ul key={index}>
+                    {typeData.damage_relations.double_damage_from.map((weak, index) => (
+                      <li key={index}>
+                        <span className={`tagType ${weak.name}`}>{primeiraLetraMaiuscula(weak.name)}</span>
+                      </li>
+                    ))}
+                  </ul>))
+            }
           </div>
 
           <div className="stats">
             <h5>Stats</h5>
             <div className="allStats">
-              <div className="item">
-                <span>HP</span>
-                <div className="barStatus">
-                  <div className="bar"></div>
-                  <ul className="separator">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                </div>
-              </div>
 
-              <div className="item">
+
+              {
+                statsTypes &&
+                statsTypes.map((typeInfo, index) => (
+
+                    <div className="item" key={index}>
+                     
+                      <span>{primeiraLetraMaiuscula(typeInfo.stat.name) }</span>
+                      <div className="barStatus">
+                        <div className="bar" style={{ width: typeInfo.base_stat + '%' }} ></div>
+                        <ul className="separator">
+                          <li></li>
+                          <li></li>
+                          <li></li>
+                          <li></li>
+                        </ul>
+                      </div>
+                    </div>
+                  ))
+              }
+
+
+
+
+
+              {/* <div className="item">
                 <span>Attack</span>
                 <div className="barStatus">
                   <div className="bar"></div>
@@ -266,7 +232,7 @@ export function ModalPokemon({
                     <li></li>
                   </ul>
                 </div>
-              </div>
+              </div> */}
             </div>
 
 
