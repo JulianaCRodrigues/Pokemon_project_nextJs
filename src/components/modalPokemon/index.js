@@ -17,11 +17,6 @@ export function ModalPokemon({
 
   const statsTypes = stats
 
-  console.log(statsTypes);
-
-
-  console.log(typeName);
-
   useEffect(() => {
     async function TypesPokes() {
       const response = await axios.get("https://pokeapi.co/api/v2/type");
@@ -164,78 +159,7 @@ export function ModalPokemon({
                     </div>
                   ))
               }
-
-
-
-
-
-              {/* <div className="item">
-                <span>Attack</span>
-                <div className="barStatus">
-                  <div className="bar"></div>
-                  <ul className="separator">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="item">
-                <span>Defense</span>
-                <div className="barStatus">
-                  <div className="bar"></div>
-                  <ul className="separator">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="item">
-                <span>Sp. attack</span>
-                <div className="barStatus">
-                  <div className="bar"></div>
-                  <ul className="separator">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="item">
-                <span>Sp. defense</span>
-                <div className="barStatus">
-                  <div className="bar"></div>
-                  <ul className="separator">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="item">
-                <span>Speed</span>
-                <div className="barStatus">
-                  <div className="bar"></div>
-                  <ul className="separator">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                </div>
-              </div> */}
             </div>
-
-
           </div>
 
         </div>
