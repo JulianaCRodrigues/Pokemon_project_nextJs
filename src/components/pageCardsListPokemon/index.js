@@ -1,56 +1,39 @@
 import { useEffect, useState } from "react";
-
 import { CardPokemon } from "./cardPokemon";
 import { TypePokemon } from "./typePokemon";
-
+import { ModalPokemon } from "../ModalPokemon";
 import axios from "axios";
 import Image from "next/image";
-import { ModalPokemon } from "../ModalPokemon";
-
 
 export function ListCardPokemon() {
 
- 
-
   const [pokemonInfo, setPokemonInfo] = useState([]);
-  const [pokemonInfoTypes, setPokemonInfoTypes] = useState("");
+  // const [pokemonInfoTypes, setPokemonInfoTypes] = useState("");
   const [pokemonById, setPokemonById] = useState("");
   const [typesPokemons, setTypesPokemons] = useState("");
   const [countPokemon, setCountPokemon] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pageList, setPageList] = useState(9)
-  const [countPages, setCountPages] = useState('');
-
+  const [countPages, setCountPages] = useState(0);
   const [isActive, setIsActive] = useState('all')
-  const [arrayFiltered, setArrayFiltered] = useState([]);
- 
 
   const openModal = (pokemon) => {
-    setPokemonInfoTypes(pokemon)
+    // setPokemonInfoTypes(pokemon)
     setPokemonById(pokemon)
     setIsModalOpen(true);
-
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
-
-
   const filterTypePokemon = (typePoke) => {
     setIsActive(typePoke); 
-
-
   }
-
-
 
   const primeiraLetraMaiuscula = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-
-
 
   useEffect(() => {
     async function listingPokemons() {
@@ -72,29 +55,32 @@ export function ListCardPokemon() {
   }, [pageList]);
 
 
-
   useEffect(() => {
     async function listingTypesPokes() {
       const response = await axios.get(
         "https://pokeapi.co/api/v2/type"
       );
       const results = response.data.results;
-   
       const typeDetailsPoke = await Promise.all(
         results.map(async (pokemon) => {
           const typeDetailsResponse = await axios.get(pokemon.url);
-          return typeDetailsResponse.data
-        }
-        )  
-      )
+          // return typeDetailsResponse.data
+
+          return {
+            length: typeDetailsResponse.data.pokemon.length,
+            data: typeDetailsResponse.data,
+            id: typeDetailsResponse.data.id
+          };
+          
+        })  
+      );
       setTypesPokemons(results);
-      setPokemonInfoTypes(typeDetailsPoke)
+      console.log(results);
+      // setPokemonInfoTypes(typeDetailsPoke)
+
     }
     listingTypesPokes();
-
-  }, [isModalOpen])
-
-
+  }, [])
 
   return (
     <section className="s-all-info-pokemons">
@@ -117,9 +103,7 @@ export function ListCardPokemon() {
           <div className="left-container">
             <ul>
               <li>
-                <button className={`type-filter all ${isActive === "all" ? "active" : ""}`}    
-                        onClick={() => setIsActive("all")}      
-                        >
+                <button className={`type-filter all ${isActive === "all" ? "active" : ""}`} onClick={() => setIsActive("all")}>
                   <div className="icon">
                     <Image
                       src="assets/icon-all.svg"
@@ -171,7 +155,6 @@ export function ListCardPokemon() {
             <div className="all">
               {pokemonInfo &&
                 pokemonInfo.map((pokemon, index) => {
-             
                   const getIconByType = () => {
                     const type = pokemon.types[0].type.name;
                     return `assets/icon-types/${type}.svg`;
@@ -188,18 +171,11 @@ export function ListCardPokemon() {
                     />
                   );
                 })}
-
-              {
-                
-              
-              isModalOpen && <ModalPokemon onClose={closeModal} pokemonData={pokemonById} />
-              
-            
-              }
-         
+              { isModalOpen && <ModalPokemon onClose={closeModal} pokemonData={pokemonById} /> }
             </div>
             {
-            isActive === "all" && !(pageList === countPages) && (
+            // isActive === "all" && 
+            (!(pageList === countPages) && 
               <button className="btnLoadMore" onClick={() => setPageList(pageList + 9)}>
                 Load more Pokémons</button>
             )}

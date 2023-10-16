@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-
 export function Footer() {
   return (
     <footer>
@@ -15,6 +14,5 @@ export function Footer() {
         </Link>
       </div>
     </footer>
-
   )
 }

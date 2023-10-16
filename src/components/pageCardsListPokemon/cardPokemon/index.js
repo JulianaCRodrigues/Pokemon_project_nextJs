@@ -1,15 +1,11 @@
 import Image from "next/image";
 
-
-
 export function CardPokemon({ image, id, name, icon, type, fnOnClick}) {
-
-
   return (
     <>
       <button className={`cardPokemon ${type}`} onClick={fnOnClick}>
         <div className="image">
-          <Image src={image} width={142} height={200} alt="Imagem Pokemon" />
+          <Image src={image} width={142} height={200} alt="Imagem Pokemon"/>
         </div>
         <div className="info">
           <div className="text">
@@ -19,11 +15,10 @@ export function CardPokemon({ image, id, name, icon, type, fnOnClick}) {
             <h3 className="h3">{name}</h3>
           </div>
           <div className="icon">
-            <Image src={icon} width={28} height={28} alt="type pokemon" />
+            <Image src={icon} width={28} height={28} alt="type pokemon"/>
           </div>
         </div>
       </button>
-
     </>
   );
 }

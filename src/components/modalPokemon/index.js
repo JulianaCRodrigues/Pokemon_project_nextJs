@@ -2,19 +2,14 @@ import Image from "next/image";
 import axios from "axios"
 import { useEffect, useState } from "react";
 
-
 export function ModalPokemon({
-
   onClose,
   pokemonData,
-
-}) {
+}) 
+{
   const [weaksTypes, setWeaksTypes] = useState("");
-
   const { name, id, types, abilities, weight, height, sprites, stats } = pokemonData;
-
   const typeName = types[0].type.name;
-
   const statsTypes = stats
 
   useEffect(() => {
@@ -29,18 +24,15 @@ export function ModalPokemon({
       );
       setWeaksTypes(typeListsPoke);
     }
-
     TypesPokes();
   }, []);
-
-
 
   const primeiraLetraMaiuscula = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
   return (
-    <div className="modal" typePokemonModal={typeName} >
+    <div className="modal" type-pokemon-modal={typeName} >
       <div className="overlay"></div>
       <div className="box">
         <button className="close" onClick={onClose}>
@@ -52,10 +44,7 @@ export function ModalPokemon({
               alt="imagem x"
             />
           </div>
-
         </button>
-
-
         <div className="leftContainer">
 
           <div className="icon">
@@ -75,14 +64,11 @@ export function ModalPokemon({
             />
           </div>
         </div>
-
         <div className="rightContainer">
           <div className="name">
             <h2>{primeiraLetraMaiuscula(name)}</h2>
             <span>  {(id < 10) ? `#00${id}` : (id < 100) ? `#0${id}` : `#00${id}`}</span>
           </div>
-
-
           <ul className="type">
             {
               types &&
@@ -95,8 +81,6 @@ export function ModalPokemon({
               ))
             }
           </ul>
-
-
           <ul className="info">
             <li>
               <span>Height</span>
@@ -106,7 +90,6 @@ export function ModalPokemon({
               <span>Weight</span>
               <strong>{`${weight / 10}kg`}</strong>
             </li>
-
             {
               abilities &&
               abilities.map((ability, index) => (
@@ -116,8 +99,6 @@ export function ModalPokemon({
                 </li>
               ))
             }
-
-
           </ul>
           <div className="weak">
             <h4>Weaknesses</h4>
@@ -134,38 +115,30 @@ export function ModalPokemon({
                   </ul>))
             }
           </div>
-
           <div className="stats">
             <h5>Stats</h5>
             <div className="allStats">
-
-
               {
                 statsTypes &&
                 statsTypes.map((typeInfo, index) => (
-
-                    <div className="item" key={index}>
-                     
-                      <span>{primeiraLetraMaiuscula(typeInfo.stat.name) }</span>
-                      <div className="barStatus">
-                        <div className="bar" style={{ width: typeInfo.base_stat + '%' }} ></div>
-                        <ul className="separator">
-                          <li></li>
-                          <li></li>
-                          <li></li>
-                          <li></li>
-                        </ul>
-                      </div>
+                  <div className="item" key={index}>
+                    <span>{primeiraLetraMaiuscula(typeInfo.stat.name)}</span>
+                    <div className="barStatus">
+                      <div className="bar" style={{ width: typeInfo.base_stat + '%' }} ></div>
+                      <ul className="separator">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                      </ul>
                     </div>
-                  ))
+                  </div>
+                ))
               }
             </div>
           </div>
-
         </div>
-
       </div>
-
     </div>
   )
 }
