@@ -1,24 +1,23 @@
 import { useEffect, useState } from "react";
-import { CardPokemon } from "./cardPokemon";
-import { TypePokemon } from "./typePokemon";
-import { ModalPokemon } from "../ModalPokemon";
+import { CardPokemon } from "../cardPokemon";
+import { TypePokemon } from "../typePokemon";
+import { ModalPokemon } from "../modalPokemon";
 import axios from "axios";
 import Image from "next/image";
 
 export function ListCardPokemon() {
-
   const [pokemonInfo, setPokemonInfo] = useState([]);
-  // const [pokemonInfoTypes, setPokemonInfoTypes] = useState("");
   const [pokemonById, setPokemonById] = useState("");
-  const [typesPokemons, setTypesPokemons] = useState("");
-  const [countPokemon, setCountPokemon] = useState("");
+  const [filteredPokemon, setFiltredPokemons] = useState([]);
+  const [typesPokemons, setTypesPokemons] = useState([]);
+  const [countPokemon, setCountPokemon] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pageList, setPageList] = useState(9)
   const [countPages, setCountPages] = useState(0);
+  const [countType, setCountType] = useState(0);
   const [isActive, setIsActive] = useState('all')
 
   const openModal = (pokemon) => {
-    // setPokemonInfoTypes(pokemon)
     setPokemonById(pokemon)
     setIsModalOpen(true);
   };
@@ -27,33 +26,9 @@ export function ListCardPokemon() {
     setIsModalOpen(false);
   };
 
-  const filterTypePokemon = (typePoke) => {
-    setIsActive(typePoke); 
-  }
-
   const primeiraLetraMaiuscula = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-
-  useEffect(() => {
-    async function listingPokemons() {
-      const response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon?limit=${pageList}&offset=0`
-      );
-      const results = response.data.results;
-      const detailedPokemonInfo = await Promise.all(
-        results.map(async (pokemon) => {
-          const detailedResponse = await axios.get(pokemon.url)
-          return detailedResponse.data;
-        })
-      );
-      setPokemonInfo(detailedPokemonInfo);
-      setCountPokemon(response.data.count);
-      setCountPages(response.data.next)
-    }
-    listingPokemons();
-  }, [pageList]);
-
 
   useEffect(() => {
     async function listingTypesPokes() {
@@ -64,23 +39,58 @@ export function ListCardPokemon() {
       const typeDetailsPoke = await Promise.all(
         results.map(async (pokemon) => {
           const typeDetailsResponse = await axios.get(pokemon.url);
-          // return typeDetailsResponse.data
-
           return {
+            name: typeDetailsResponse.data.name,
             length: typeDetailsResponse.data.pokemon.length,
-            data: typeDetailsResponse.data,
             id: typeDetailsResponse.data.id
-          };
-          
-        })  
+          }
+        })
       );
-      setTypesPokemons(results);
-      console.log(results);
-      // setPokemonInfoTypes(typeDetailsPoke)
-
+      setTypesPokemons(typeDetailsPoke);
     }
     listingTypesPokes();
   }, [])
+
+  useEffect(() => {
+    async function ListingAllPokemon() {
+      const response = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon?limit=${pageList}`
+      );
+      const results = response.data.results;
+      const detailedPokemonInfo = await Promise.all(
+        results.map(async (pokemon) => {
+          const detailedResponse = await axios.get(pokemon.url);
+          return detailedResponse.data;
+        })
+      );
+      setPokemonInfo(detailedPokemonInfo);
+      setCountPokemon(response.data.count);
+    }
+    ListingAllPokemon();
+  }, [pageList]);
+
+  async function filterTypePokemon(typePoke) {
+    const type = typesPokemons.find((type) => type.name === typePoke);
+    if (type) {
+      const idPoke = type.name;
+      const response = await axios.get(`https://pokeapi.co/api/v2/type/${idPoke}`);
+      const pokemonData = response.data.pokemon;
+      const detailedPokemonInfo = await Promise.all(
+        pokemonData.map(async (pokemon) => {
+          const detailedResponse = await axios.get(pokemon.pokemon.url);
+          return detailedResponse.data;
+        })
+      );
+      setFiltredPokemons(detailedPokemonInfo);
+      setCountType(detailedPokemonInfo.length);
+      setIsActive(typePoke);
+    } else {
+      setFiltredPokemons([]);
+      setIsActive('all');
+    }
+  }
+
+  const pokemonsNewList = isActive === 'all' ? pokemonInfo : (filteredPokemon.length > 0 ? filteredPokemon : []);
 
   return (
     <section className="s-all-info-pokemons">
@@ -103,7 +113,7 @@ export function ListCardPokemon() {
           <div className="left-container">
             <ul>
               <li>
-                <button className={`type-filter all ${isActive === "all" ? "active" : ""}`} onClick={() => setIsActive("all")}>
+                <button className={`type-filter all ${isActive === "all" ? "active" : ""}`} onClick={() => filterTypePokemon("all")}>
                   <div className="icon">
                     <Image
                       src="assets/icon-all.svg"
@@ -127,9 +137,10 @@ export function ListCardPokemon() {
                       <TypePokemon
                         key={index}
                         typePoke={poketypes.name}
+                        idType={poketypes.id}
                         imageSrc={getImageByType()}
                         nameType={primeiraLetraMaiuscula(poketypes.name)}
-                        fnOnClick={filterTypePokemon}
+                        fnOnClick={() => filterTypePokemon(poketypes.name)}
                         activeType={isActive}
                       />)
                   }
@@ -147,14 +158,21 @@ export function ListCardPokemon() {
                   height={32}
                 />
                 <span>
-                  <strong className="countPokemons">{countPokemon} </strong>{" "}
+                  <strong className="countPokemons">{isActive === "all" ? countPokemon : countType} </strong>{" "}
                   Pokémons
                 </span>
               </div>
             </div>
             <div className="all">
-              {pokemonInfo &&
-                pokemonInfo.map((pokemon, index) => {
+              {pokemonsNewList
+                .filter((pokemon) => {
+                  if (pokemon && pokemon.types && pokemon.sprites && pokemon.sprites.other) {
+                    const dreamWorld = pokemon.sprites.other.dream_world;
+                    return dreamWorld && dreamWorld.front_default !== null;
+                  }
+                  return false;
+                })
+                .map((pokemon, index) => {
                   const getIconByType = () => {
                     const type = pokemon.types[0].type.name;
                     return `assets/icon-types/${type}.svg`;
@@ -162,7 +180,7 @@ export function ListCardPokemon() {
                   return (
                     <CardPokemon
                       key={index}
-                      type={pokemon.types[0].type.name}
+                      type={pokemon.type}
                       image={pokemon.sprites.other.dream_world.front_default}
                       id={pokemon.id}
                       name={primeiraLetraMaiuscula(pokemon.name)}
@@ -171,13 +189,12 @@ export function ListCardPokemon() {
                     />
                   );
                 })}
-              { isModalOpen && <ModalPokemon onClose={closeModal} pokemonData={pokemonById} /> }
+              {isModalOpen && <ModalPokemon onClose={closeModal} pokemonData={pokemonById} />}
             </div>
-            {
-            // isActive === "all" && 
-            (!(pageList === countPages) && 
+            {!(filteredPokemon.length > 0) && pageList !== countPages && (
               <button className="btnLoadMore" onClick={() => setPageList(pageList + 9)}>
-                Load more Pokémons</button>
+                Load more Pokémons
+              </button>
             )}
           </div>
         </div>
@@ -185,3 +202,7 @@ export function ListCardPokemon() {
     </section>
   );
 }
+
+
+
+

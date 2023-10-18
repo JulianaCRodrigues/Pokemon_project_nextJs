@@ -5,7 +5,7 @@ const nextConfig = {
 
 module.exports = {
   images: {
-    domains: ['pokeapi.co'], // Adicione o hostname aqui
+    domains: ['pokeapi.co'], 
   },
   nextConfig
 }

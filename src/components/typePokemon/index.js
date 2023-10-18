@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export function TypePokemon({ typePoke, nameType, imageSrc, fnOnClick, activeType }) {
+export function TypePokemon({ typePoke, nameType, imageSrc, fnOnClick, activeType, idType }) {
   const isActive = typePoke === activeType;
 
   const handleClick = () => {
@@ -9,7 +9,7 @@ export function TypePokemon({ typePoke, nameType, imageSrc, fnOnClick, activeTyp
   
   return (
     <li>
-      <button className={`type-filter ${typePoke} ${isActive ? "active" : ""} `} onClick={handleClick}>
+      <button className={`type-filter ${typePoke} ${isActive ? "active" : ""} `} onClick={handleClick} id={idType}>
         <div className="icon">
           <Image
             src={imageSrc}
