@@ -740,7 +740,7 @@
 
       .image {
         position: absolute;
-        left: 1.4rem;
+        left: 0.8rem;
         bottom: 13.1rem;
         width: 20.2rem;
 
@@ -752,11 +752,11 @@
 
     .rightContainer {
       padding: 3.5rem 3.2rem 2.5rem 4.4rem;
+      margin-left: 1rem;
 
       .name {
         display: flex;
         align-items: flex-end;
-        margin-bottom: 1rem;
 
         h2 {
           color: #2F3133;
@@ -866,7 +866,7 @@
    
           .item {
             display: flex;
-            @include flex(row, center, space-between);
+            @include flex(row, center, flex-start);
 
             &:not(:last-child) {
               margin-bottom: 1rem;
@@ -874,7 +874,7 @@
 
             span {
               display: block;
-              width: 6.8rem;
+              width: 5.8rem;
               color: #7A7D80;
               font-size: 12px;
               font-weight: 400;

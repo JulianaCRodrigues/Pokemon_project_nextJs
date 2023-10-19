@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { CardPokemon } from "../cardPokemon";
 import { TypePokemon } from "../typePokemon";
 import { ModalPokemon } from "../modalPokemon";
+import { InputSearch } from "../input";
 import axios from "axios";
 import Image from "next/image";
 
@@ -15,7 +16,9 @@ export function ListCardPokemon() {
   const [pageList, setPageList] = useState(9)
   const [countPages, setCountPages] = useState(0);
   const [countType, setCountType] = useState(0);
-  const [isActive, setIsActive] = useState('all')
+  const [isActive, setIsActive] = useState("all")
+  const [inputValue, setInputValue] = useState("")
+  const [searchResults, setSearchResults] = useState(null);
 
   const openModal = (pokemon) => {
     setPokemonById(pokemon)
@@ -78,6 +81,7 @@ export function ListCardPokemon() {
       const detailedPokemonInfo = await Promise.all(
         pokemonData.map(async (pokemon) => {
           const detailedResponse = await axios.get(pokemon.pokemon.url);
+          console.log();
           return detailedResponse.data;
         })
       );
@@ -90,7 +94,27 @@ export function ListCardPokemon() {
     }
   }
 
-  const pokemonsNewList = isActive === 'all' ? pokemonInfo : (filteredPokemon.length > 0 ? filteredPokemon : []);
+  const searchPokemon = async () => {
+    setIsActive('search');
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${inputValue}`);
+    setSearchResults(response.data)
+    setCountPokemon(1)
+    setCountType(1)
+    setInputValue('');
+  }
+
+  const handleInputKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      searchPokemon()
+    }
+  }
+
+  const handleButtonClick = () => {
+    setInputValue('')
+    searchPokemon()
+  }
+
+  const pokemonsNewList = isActive === 'search' ? [] : (isActive === 'all' ? pokemonInfo : (filteredPokemon.length > 0 ? filteredPokemon : []));
 
   return (
     <section className="s-all-info-pokemons">
@@ -98,8 +122,15 @@ export function ListCardPokemon() {
         <div className="top">
           <h2>Select your Pokémon</h2>
           <div className="search">
-            <input type="text" placeholder="Search name or code" />
-            <button type="button">
+            <InputSearch
+              type="text"
+              value={inputValue}
+              fnOnChange={(e) => setInputValue(e.target.value.toLowerCase())}
+              fnOnKeyUp={handleInputKeyPress}
+            />
+            <button type="button"
+              onClick={handleButtonClick}
+            >
               <Image
                 src="assets/icon-search.svg"
                 alt=""
@@ -113,7 +144,7 @@ export function ListCardPokemon() {
           <div className="left-container">
             <ul>
               <li>
-                <button className={`type-filter all ${isActive === "all" ? "active" : ""}`} onClick={() => filterTypePokemon("all")}>
+                <button className={`type-filter all ${isActive === "all" ? "active" : ""}`} onClick={() => { filterTypePokemon("all"); setCountPokemon(1292) }}>
                   <div className="icon">
                     <Image
                       src="assets/icon-all.svg"
@@ -133,6 +164,7 @@ export function ListCardPokemon() {
                     return `./assets/icon-types/${type}.svg`;
                   };
                   if (index < 18) {
+
                     return (
                       <TypePokemon
                         key={index}
@@ -163,35 +195,49 @@ export function ListCardPokemon() {
                 </span>
               </div>
             </div>
+            {isModalOpen && <ModalPokemon onClose={closeModal} pokemonData={pokemonById} />}
             <div className="all">
-              {pokemonsNewList
-                .filter((pokemon) => {
-                  if (pokemon && pokemon.types && pokemon.sprites && pokemon.sprites.other) {
-                    const dreamWorld = pokemon.sprites.other.dream_world;
-                    return dreamWorld && dreamWorld.front_default !== null;
-                  }
-                  return false;
-                })
-                .map((pokemon, index) => {
-                  const getIconByType = () => {
-                    const type = pokemon.types[0].type.name;
-                    return `assets/icon-types/${type}.svg`;
-                  };
-                  return (
-                    <CardPokemon
-                      key={index}
-                      type={pokemon.type}
-                      image={pokemon.sprites.other.dream_world.front_default}
-                      id={pokemon.id}
-                      name={primeiraLetraMaiuscula(pokemon.name)}
-                      icon={getIconByType()}
-                      fnOnClick={() => openModal(pokemon)}
-                    />
-                  );
-                })}
-              {isModalOpen && <ModalPokemon onClose={closeModal} pokemonData={pokemonById} />}
+              {isActive === 'search' ? (
+                searchResults && searchResults.types && (
+                  <CardPokemon
+                    key={searchResults.id}
+                    type={searchResults.types[0]?.type.name}
+                    image={searchResults.sprites?.other?.dream_world?.front_default}
+                    id={searchResults.id}
+                    name={primeiraLetraMaiuscula(searchResults.name)}
+                    icon={`assets/icon-types/${searchResults.types[0]?.type.name}.svg`}
+                    fnOnClick={() => openModal(searchResults)}
+                  />
+                )
+              ) : (
+                pokemonsNewList
+                  .filter((pokemon) => {
+                    if (pokemon && pokemon.types && pokemon.sprites && pokemon.sprites.other) {
+                      const dreamWorld = pokemon.sprites.other.dream_world;
+                      return dreamWorld && dreamWorld.front_default !== null;
+                    }
+                    return false;
+                  })
+                  .map((pokemon, index) => {
+                    const getIconByType = () => {
+                      const type = pokemon.types[0]?.type.name;
+                      return `assets/icon-types/${type}.svg`;
+                    };
+                    return (
+                      <CardPokemon
+                        key={index}
+                        type={pokemon.types[0]?.type.name}
+                        image={pokemon.sprites?.other?.dream_world?.front_default}
+                        id={pokemon.id}
+                        name={primeiraLetraMaiuscula(pokemon.name)}
+                        icon={getIconByType()}
+                        fnOnClick={() => openModal(pokemon)}
+                      />
+                    );
+                  })
+              )}
             </div>
-            {!(filteredPokemon.length > 0) && pageList !== countPages && (
+            {!(filteredPokemon.length > 0) && pageList !== countPages && !searchResults &&(
               <button className="btnLoadMore" onClick={() => setPageList(pageList + 9)}>
                 Load more Pokémons
               </button>

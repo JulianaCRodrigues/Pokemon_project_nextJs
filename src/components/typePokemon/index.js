@@ -1,10 +1,11 @@
 import Image from "next/image";
 
-export function TypePokemon({ typePoke, nameType, imageSrc, fnOnClick, activeType, idType }) {
+export function TypePokemon({ typePoke, nameType, imageSrc, fnOnClick, activeType, idType, fnOnChange }) {
   const isActive = typePoke === activeType;
 
   const handleClick = () => {
     fnOnClick(typePoke)
+   
   }
   
   return (
