@@ -5,6 +5,7 @@ import { ModalPokemon } from "../modalPokemon";
 import { InputSearch } from "../input";
 import axios from "axios";
 import Image from "next/image";
+import { SelectCustom } from "../selectCustom";
 
 export function ListCardPokemon() {
   const [pokemonInfo, setPokemonInfo] = useState([]);
@@ -19,6 +20,7 @@ export function ListCardPokemon() {
   const [isActive, setIsActive] = useState("all")
   const [inputValue, setInputValue] = useState("")
   const [searchResults, setSearchResults] = useState(null);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const openModal = (pokemon) => {
     setPokemonById(pokemon)
@@ -28,6 +30,11 @@ export function ListCardPokemon() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+
 
   const primeiraLetraMaiuscula = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -81,7 +88,6 @@ export function ListCardPokemon() {
       const detailedPokemonInfo = await Promise.all(
         pokemonData.map(async (pokemon) => {
           const detailedResponse = await axios.get(pokemon.pokemon.url);
-          console.log();
           return detailedResponse.data;
         })
       );
@@ -164,7 +170,6 @@ export function ListCardPokemon() {
                     return `./assets/icon-types/${type}.svg`;
                   };
                   if (index < 18) {
-
                     return (
                       <TypePokemon
                         key={index}
@@ -195,6 +200,50 @@ export function ListCardPokemon() {
                 </span>
               </div>
             </div>
+            <div className="select-custom ">
+              <button className="item-selected" onClick={toggleDropdown}>
+                <span>Show:</span>
+                <strong>All</strong>
+              </button>
+              <ul className={`dropdown-select ${isDropdownOpen ? "open" : ""}`}>
+              <li>
+                <button className={`type-filter ${isActive === "all" ? "active" : ""}`} onClick={() => { filterTypePokemon("all"); setCountPokemon(1292) }}>
+                  <div className="icon">
+                    <Image
+                      src="assets/icon-all.svg"
+                      alt=""
+                      width={26}
+                      height={26}
+                    />
+                  </div>
+                  <span style={{color: '#3F5DB3'}}>All</span>
+                </button>
+              </li>
+                {isDropdownOpen && (
+                  typesPokemons &&
+                  typesPokemons.map((poketypes, index) => {
+                    const getImageByType = () => {
+                      const type = poketypes.name;
+                      return `./assets/icon-types/${type}.svg`;
+                    };
+                    if (index < 18) {
+                      return (
+                        <SelectCustom
+                          key={index}
+                          imageSrc={getImageByType()}
+                          typePoke={poketypes.name}
+                          nameType={primeiraLetraMaiuscula(poketypes.name)}
+                          fnOnClick={() => filterTypePokemon(poketypes.name)}
+                          activeType={isActive}
+                          idType={poketypes.id}
+                        />
+                      )
+                    }
+                  })
+                )}
+              </ul>
+            </div>
+
             {isModalOpen && <ModalPokemon onClose={closeModal} pokemonData={pokemonById} />}
             <div className="all">
               {isActive === 'search' ? (
@@ -237,7 +286,7 @@ export function ListCardPokemon() {
                   })
               )}
             </div>
-            {!(filteredPokemon.length > 0) && pageList !== countPages && !searchResults &&(
+            {!(filteredPokemon.length > 0) && pageList !== countPages && !searchResults && (
               <button className="btnLoadMore" onClick={() => setPageList(pageList + 9)}>
                 Load more Pokémons
               </button>

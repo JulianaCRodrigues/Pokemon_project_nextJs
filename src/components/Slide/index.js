@@ -1,8 +1,5 @@
 
-
-
 export function SlideArea() {
-
   return (
 
     <section className="s-area-slide-hero">
