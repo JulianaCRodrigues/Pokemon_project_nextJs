@@ -7,5 +7,6 @@ module.exports = {
   images: {
     domains: ['pokeapi.co'], 
   },
+  experimental: { esmExternals: true },
   nextConfig
 }

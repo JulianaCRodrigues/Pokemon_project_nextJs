@@ -3,9 +3,10 @@ import { CardPokemon } from "../cardPokemon";
 import { TypePokemon } from "../typePokemon";
 import { ModalPokemon } from "../modalPokemon";
 import { InputSearch } from "../input";
+import { SelectCustom } from "../selectCustom";
 import axios from "axios";
 import Image from "next/image";
-import { SelectCustom } from "../selectCustom";
+
 
 export function ListCardPokemon() {
   const [pokemonInfo, setPokemonInfo] = useState([]);
@@ -123,6 +124,7 @@ export function ListCardPokemon() {
   const pokemonsNewList = isActive === 'search' ? [] : (isActive === 'all' ? pokemonInfo : (filteredPokemon.length > 0 ? filteredPokemon : []));
 
   return (
+    
     <section className="s-all-info-pokemons">
       <div className="container">
         <div className="top">

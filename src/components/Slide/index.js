@@ -1,7 +1,10 @@
+import Image from "next/image";
+import 'swiper/react';
+import 'swiper/css/effect-fade';
+import "swiper/css/pagination";
 
 export function SlideArea() {
   return (
-
     <section className="s-area-slide-hero">
       <div className="slide-hero">
         <div className="swiper-wrapper">
@@ -11,44 +14,45 @@ export function SlideArea() {
                 <div className="text">
                   <div className="tag">
                     <div className="icon">
-                      <img src="assets/bag-red.svg"></img>
-
+                      <Image
+                        src="assets/bag-red.svg"
+                        alt=""
+                        width="1440"
+                        height="706"
+                      />
                     </div>
                     <span>pokedex</span>
                   </div>
-
                   <h1>Who is that Pokémon?</h1>
                   <p>
                     The perfect guide for those who want to hunt Pokémons around the world
                   </p>
                   <div className="image">
-                    <img src="assets/lighting.svg" className="lights" alt="Luzes" title="Luzes"></img>
-                    <img src="assets/pokeball-red.png" alt="POkeball" title="Pokeball"></img>
+                    <Image src="/assets/lighting.svg" className="lights" alt="Luzes" title="Luzes" width="170" height="58" />
+                    <Image src="/assets/pokeball-red.png" className="pokeball" alt="Pokeball" title="Pokeball" width={798} height={514} />
                   </div>
-
                 </div>
-
                 <div className="area-explore">
                   <div className="txt">
                     <div className="icon">
-                      <img src="assets/arrow-down-white.svg" alt="" />
+                      <Image src="/assets/arrow-down-white.svg" alt="" width="9" height="16" />
                     </div>
                     <span>explore</span>
                   </div>
-
+                  <div class="swiper-pagination"></div>
                 </div>
               </div>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
-
-
   )
 }
+
+
+
+
+
+
+

@@ -10,7 +10,7 @@ export function Header() {
           src="assets/logo.svg" alt="Logo do Pokemon" title="Logo do Pokemon" width={159} height={58}
           />
         </Link>
-        <p>Case Study -&gt; Code<strong>Boost</strong></p>
+        <p>Case Study</p>
       </div>
     </header>
   )

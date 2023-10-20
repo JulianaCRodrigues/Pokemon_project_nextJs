@@ -6,7 +6,7 @@ export function Footer() {
     <footer>
       <div className='container'>
         <div className='text'>
-          <h3 className="h3">Modulo NextJs</h3>
+          <h3 className="h3">NextJs</h3>
           <p>Consumindo e exibindo dados de uma API</p>
         </div>
         <Link href="" target="_blank">
